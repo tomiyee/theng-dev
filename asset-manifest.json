@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/theng-dev/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/theng-dev/static/js/main.0a8b2edb.chunk.js",
+    "main.js.map": "/theng-dev/static/js/main.0a8b2edb.chunk.js.map",
+    "runtime-main.js": "/theng-dev/static/js/runtime-main.d5105d9e.js",
+    "runtime-main.js.map": "/theng-dev/static/js/runtime-main.d5105d9e.js.map",
+    "static/js/2.e1a76acb.chunk.js": "/theng-dev/static/js/2.e1a76acb.chunk.js",
+    "static/js/2.e1a76acb.chunk.js.map": "/theng-dev/static/js/2.e1a76acb.chunk.js.map",
+    "static/js/3.46f9f43e.chunk.js": "/theng-dev/static/js/3.46f9f43e.chunk.js",
+    "static/js/3.46f9f43e.chunk.js.map": "/theng-dev/static/js/3.46f9f43e.chunk.js.map",
+    "index.html": "/theng-dev/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/theng-dev/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.e1a76acb.chunk.js.LICENSE.txt": "/theng-dev/static/js/2.e1a76acb.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/theng-dev/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d5105d9e.js",
+    "static/js/2.e1a76acb.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.0a8b2edb.chunk.js"
+  ]
+}
