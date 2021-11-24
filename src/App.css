@@ -2,3 +2,14 @@
   background: var(--white);
   text-align: center;
 }
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flex.row {
+  flex-direction: row;
+}

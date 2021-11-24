@@ -1,0 +1,9 @@
+footer {
+  background: var(--navy);
+  height: 100px;
+}
+
+.footnote {
+  color: rgba(247,247,249, 0.35);
+  text-align: center;
+}
