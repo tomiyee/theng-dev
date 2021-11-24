@@ -1,25 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Vector2D from './Vector2D.js';
 import './Banner.css';
 
 const BG_COLOR = "#2B2D42";
-const BOID_COLOR = "rgba(247,247,249, 0.35)";
-const BOID_SPEED = 10;
+const MIN_ALPHA = 0.35;
+const BOID_COLOR = {r:247,g:247,b:249};
+const BOID_SPEED = 3;
 const BOID_RADIUS = 6;
 let A_FACTOR = 0.3;
 let C_FACTOR = 0.04;
-let R_FACTOR = 1.4
+let R_FACTOR = 1.8;
 let boids = [];
 let canvas, ctx;
-const FPS = 30;
-const FLOCK_RADIUS = 50;
+const FLOCK_RADIUS = 40;
 let WIDTH = 900, HEIGHT = 600;
 
+let mouseOnCanvas = false;
+let mouseX = 0, mouseY = 0;
 /**
  * Banner is the banner on the home page of my portfolio. It has the flocking simulator.
  */
 function Banner() {
-  const canvasJsx = (<canvas className='banner-bg-canvas' width='100%' height='100%'/>);
+  const canvasJsx = (
+    <canvas 
+      className='banner-bg-canvas' 
+      width='100%' 
+      height='100%'
+      onMouseEnter={() => mouseOnCanvas = true}
+      onMouseLeave={() => mouseOnCanvas = false}
+      onMouseMove={(e) => {const rect = canvas.getBoundingClientRect(); mouseX = e.clientX - rect.left; mouseY=e.clientY - rect.top;}}
+    />
+  );
 
   const NUM_BOIDS = (window.innerWidth * window.innerHeight) / (100*100) * 2
   for (let i = 0; i < NUM_BOIDS; i++) {
@@ -34,11 +45,7 @@ function Banner() {
     /* Called upon mount */
     canvas = document.getElementsByClassName('banner-bg-canvas')[0];
     ctx = canvas.getContext('2d');
-    const intervalId = setInterval(update, 1000/FPS);
-    /* The function run when the <Banner> is unmounted */
-    return function cleanup () {
-      clearInterval(intervalId);
-    }
+    window.requestAnimationFrame(update);
   }, []);
 
   return (
@@ -69,14 +76,14 @@ function update () {
   // black background
   HEIGHT = window.innerHeight;
   WIDTH  = window.innerWidth;
-  if (!canvas) return console.log('canvas DNE?');
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
-  drawRectangle(0, 0,WIDTH, HEIGHT, BG_COLOR)
-  boids.forEach((boid, i) => {
-    boid.update(boids);
-    boid.draw(i==0);
-  });
+  drawRectangle(0, 0, WIDTH, HEIGHT, BG_COLOR);
+  for (let i = 0; i < boids.length; i++) {
+    boids[i].update(boids);
+    boids[i].draw();
+  }
+  window.requestAnimationFrame(update);
 }
 
 class Boid {
@@ -85,8 +92,8 @@ class Boid {
       !isNaN(x) ? x : Math.random()*WIDTH,
       !isNaN(y) ? y : Math.random()*HEIGHT,
     );
-    this.velocity = new Vector2D(Math.random()*2-1, Math.random()*2-1)
-    this.velocity.setLength(BOID_SPEED);
+    const angle = Math.random()*2*Math.PI;
+    this.velocity = new Vector2D(Math.cos(angle), Math.sin(angle));
     this.acceleration = new Vector2D(0,0);
   }
 
@@ -99,11 +106,11 @@ class Boid {
    * @return {Boid[]}       A subset of boids which are within FLOCK_RADIUS of this
    */
   localFlock (boids) {
-    let local = [];
-    for (let boid of boids)
-      if (this.position.subtract(boid.position).length() < FLOCK_RADIUS && boid !== this)
-        local.push(boid);
-    return local;
+    const flock = [];
+    for (let i = 0; i < boids.length; i++)
+      if (Math.sqrt((this.position.x - boids[i].position.x)**2+(this.position.y - boids[i].position.y)**2) < FLOCK_RADIUS && boids[i] !== this)
+        flock.push(boids[i]);
+    return flock;
   }
 
   /**
@@ -115,8 +122,8 @@ class Boid {
    */
   align (local) {
     let force = new Vector2D(0,0);
-    for (let boid of local) {
-      force.add(boid.velocity, true);
+    for (let i = 0; i < local.length; i++) {
+      force.add(local[i].velocity, true);
     }
     force.setMax(2);
     return force.scale(A_FACTOR);
@@ -148,42 +155,48 @@ class Boid {
    */
   repulsion (local) {
     let force = new Vector2D (0,0);
-    for (let boid of local) {
-      let displ = this.position.subtract(boid.position);
-      force.x += 1 / displ.x;
-      force.y += 1 / displ.y;
+    for (let i = 0; i < local.length; i++) {
+      force.x += 1 / (this.position.x - local[i].position.x);
+      force.y += 1 / (this.position.y - local[i].position.y);
     }
-    force.setMax(2)
+    if (mouseOnCanvas && (Math.sqrt((this.position.x - mouseX)**2+(this.position.y -mouseY)**2) < 4 * FLOCK_RADIUS)) {
+      force.x += 10 / (this.position.x - mouseX);
+      force.y += 10 / (this.position.y - mouseY);
+    }
+    force.setMax(3)
     return force.scale(R_FACTOR);
   }
 
   draw () {
-    // Center of the boid
-    const x = this.position.x;
-    const y = this.position.y;
     // Angle the boid is facing
     const angle = Math.atan2(this.velocity.y, this.velocity.x);
     // The angle of the front of the head
     const backAngle = Math.PI/5;
-
-    ctx.fillStyle = BOID_COLOR;
+    // Distance to the mouse
+    ctx.fillStyle = `rgba(${BOID_COLOR.r},${BOID_COLOR.g},${BOID_COLOR.b},${MIN_ALPHA})`;
+    
+    if (mouseOnCanvas){
+      const d = Math.sqrt((this.position.x-mouseX)**2 + (this.position.y-mouseY)**2)
+      const a = d**2 / (16*FLOCK_RADIUS**2) * (MIN_ALPHA-1) + 1;
+      ctx.fillStyle = `rgba(${BOID_COLOR.r},${BOID_COLOR.g},${BOID_COLOR.b},${a > MIN_ALPHA ? a : MIN_ALPHA})`;
+    } 
     ctx.beginPath();
     ctx.moveTo(
-      x + BOID_RADIUS * Math.cos(angle), 
-      y + Math.sin(angle) * BOID_RADIUS);
+      this.position.x + BOID_RADIUS * Math.cos(angle), 
+      this.position.y + Math.sin(angle) * BOID_RADIUS);
     ctx.lineTo(
-      x + BOID_RADIUS * Math.cos(angle + Math.PI - backAngle), 
-      y + BOID_RADIUS * Math.sin(angle + Math.PI - backAngle));
+      this.position.x + BOID_RADIUS * Math.cos(angle + Math.PI - backAngle), 
+      this.position.y + BOID_RADIUS * Math.sin(angle + Math.PI - backAngle));
     ctx.lineTo(
-      x + BOID_RADIUS * Math.cos(angle + Math.PI + backAngle), 
-      y + BOID_RADIUS * Math.sin(angle + Math.PI + backAngle));
+      this.position.x + BOID_RADIUS * Math.cos(angle + Math.PI + backAngle), 
+      this.position.y + BOID_RADIUS * Math.sin(angle + Math.PI + backAngle));
     ctx.fill();
 
   }
 
   update (boids) {
-    let local = this.localFlock (boids);
-    if (local.length > 0){
+    const local = this.localFlock (boids);
+    if (local.length > 0) {
       // Clears any existing acceleration
       this.acceleration.scale(0);
       // Calculates the sum of the three forces described above
@@ -193,11 +206,12 @@ class Boid {
       this.acceleration.add(forceAlign, true);
       this.acceleration.add(forceCohesion, true);
       this.acceleration.add(forceRepulsion, true);
+      
       // Applies this acceleration to the boid's velocity instantaneously
       this.velocity.add(this.acceleration, true);
     }
+
     this.velocity.setLength(BOID_SPEED);
-    this.velocity.length() < 3 && console.log(this.velocity.length())
     this.position.add(this.velocity, true);
 
     // Loop around Horizontally
