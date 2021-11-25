@@ -1,0 +1,20 @@
+.home-content {
+  width: 100%;
+  max-width: 1600px;
+  min-height: 100vh;
+  margin: 0px auto;
+}
+
+.home-content section {
+  max-width: var(--max-content-width);
+  margin: 0px auto;
+}
+.about-me {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 50px;
+}
+
+.home-content section:nth-child(odd) {
+  background-color: lightgray;
+}

@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Banner } from './components/Banner';
 import { Home } from './views/Home';
+import { Archives } from './views/Archives';
 import { Page404 } from './views/Page404';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           {homePaths.map(p => 
             <Route exact path={p} element={<Home/>}/>
           )}
+          <Route exact path='archives' element={<Archives/>} />
           <Route exact path='*' element={<Page404/>} />
         </Routes>
 

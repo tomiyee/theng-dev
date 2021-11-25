@@ -6,7 +6,7 @@ import "./Navbar.css";
  */
 const Navbar = props => {
   return (
-    <nav class='navbar'>HOME ABOUT PORTFOLIO CONTACT</nav>
+    <nav className='navbar'>HOME ABOUT PORTFOLIO CONTACT</nav>
   );
 };
 

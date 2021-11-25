@@ -2,8 +2,8 @@ import './Footer.css';
 
 const Footer = (props) => {
 
-  const icons = (<div class='flex row'>Icons will go here</div>);
-  const info = (<div class='footnote'></div>)
+  const icons = (<div className='flex row'>Icons will go here</div>);
+  const info = (<div className='footnote'></div>)
   return (
     <footer>
       {icons}
