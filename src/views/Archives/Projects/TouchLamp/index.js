@@ -1,0 +1,1 @@
+export { default as TouchLamp } from './TouchLamp.js';
