@@ -1,0 +1,16 @@
+.project-card {
+    display: inline;
+    width: 200px;
+    height: 200ox;
+}
+
+.projects-content {
+    display: flex;
+    justify-content: center;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

@@ -28,7 +28,12 @@ function Banner() {
       height='100%'
       onMouseEnter={() => mouseOnCanvas = true}
       onMouseLeave={() => mouseOnCanvas = false}
-      onMouseMove={(e) => {const rect = canvas.getBoundingClientRect(); mouseX = e.clientX - rect.left; mouseY=e.clientY - rect.top;}}
+      onMouseMove={(e) => {
+        if (!canvas) return;
+        const rect = canvas.getBoundingClientRect(); 
+        mouseX = e.clientX - rect.left; 
+        mouseY = e.clientY - rect.top;
+      }}
     />
   );
 
@@ -137,11 +142,14 @@ class Boid {
    * @return {Vector2D}       A vector repr this force's influence
    */
   cohesion (local) {
-    let avg = new Vector2D(0,0);
-    for (let boid of local)
-      avg.add(boid.position, true);
-    avg.scale(1/local.length);
-    let force = avg.subtract(this.position);
+    
+    const avg = {x:0, y:0}
+    for (let i = 0; i < local.length; i++){
+      avg.x += local[i].position.x;
+      avg.y += local[i].position.y;
+    }
+    const len = Math.sqrt(avg.x**2 + avg.y**2);
+    let force = new Vector2D(avg.x / len - this.position.x, avg.y / len - this.position.y);
     force.setMax(2);
     return force.scale(C_FACTOR);
   }

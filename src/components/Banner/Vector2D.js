@@ -20,15 +20,12 @@
    * @ returns {Vector} Returns a new vector with the result of the addition, otherwise returns this
    */
   add (other, override) {
-
     if (!override) 
       return new Vector2D(this.x + other.x, this.y + other.y);
     this.x += other.x;
     this.y += other.y;
     return this;
   }
-
-
 
   /**
    * Subtracts the other vector from the current one
@@ -44,8 +41,6 @@
     this.y -= other.y;
     return this;
   }
-
-
 
   /**
    * Calculates the Euclidean distance between vectors
@@ -133,12 +128,17 @@
   }
 
   setLength (l) {
-    this.scale(l/this.length());
+    const len = Math.sqrt( this.x**2 + this.y**2 );
+    this.x *= l / len;
+    this.y *= l / len;
   }
 
   setMax (l) {
-    if (this.length() > l)
-      this.setLength(l)
+    const len = Math.sqrt( this.x**2 + this.y**2 );
+    if (len > l) {
+      this.x *= l / len;
+      this.y *= l / len;
+    }
   }
 
 

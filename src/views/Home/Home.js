@@ -21,10 +21,9 @@ const Home = (props) => {
 
 const AboutMe = (props) => {
   return (
-    <section>
-      <h2>Who is This Guy?</h2>
-      <div className='about-me'>
-        <div className='about-me-content'>
+    <section className='about-me-section'>
+      <div className='about-me-content'>
+        <div className='about-me-description'>
           <p>
             Hello! My name is Tommy Heng and I enjoy developing solutions to challenges faced by members of my 
             community. My interest in web development started in 2011, where my mission was to develop a 

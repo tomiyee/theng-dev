@@ -6,15 +6,28 @@
 }
 
 .home-content section {
-  max-width: var(--max-content-width);
   margin: 0px auto;
 }
-.about-me {
+
+.home-content section:nth-child(odd) {
+  background-color: var(--white-darker);
+}
+
+.about-me-section {
+  display: flex;
+  justify-content: center;
+}
+
+.about-me-content {
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: 50px;
 }
 
-.home-content section:nth-child(odd) {
-  background-color: lightgray;
+.about-me-description {
+  text-align: justify;
+}
+
+.about-me-content {
+  max-width: var(--max-content-width);
 }

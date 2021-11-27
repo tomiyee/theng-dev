@@ -1,0 +1,22 @@
+.experience-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+}
+
+.experience-content {
+    width: 100%;
+    max-width: var(--max-content-width);
+}
+
+.experience-viewer {
+    display:  grid;
+    grid-template-columns: 2fr 5fr;
+    width: var(--max-content-width);
+}
+
+.tabpanel {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
