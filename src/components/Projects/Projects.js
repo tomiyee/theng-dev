@@ -35,7 +35,7 @@ const featuredProjectsData = [
   },
   {
     title: 'Conversational AI Interface',
-    desc: 'I developed and designed a visual programming interace for conversational agents like Amazon Alexa.',
+    desc: 'A visual programming interace for conversational agents like Amazon Alexa.',
     image: '',
     tech: ['GWT', 'AWS', 'Node.js'],
     links: [
@@ -55,7 +55,7 @@ const icons = new Map();
  * @returns 
  */
 const ProjectCard = (props) => {
-  const { links, projectTechList, title} = props;
+  const { links, projectTechList, title, desc} = props;
 
   /** @type {JSX.Element[]} Converts the list of project tech into an itemised list*/
   const projectTechListItems = projectTechList.map((item) => (<li>{item}</li>));
@@ -74,9 +74,7 @@ const ProjectCard = (props) => {
         <h2>{title}</h2>
       </div>
       <div className='project-card-description'>
-        <p>
-          A brief description of the code goes here
-        </p>
+        <p>{desc}</p>
       </div>
       <div className='project-card-bottom'>
         <ul className='project-card-tech-list'>
