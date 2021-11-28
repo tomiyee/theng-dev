@@ -6,7 +6,7 @@ const OutlineButton = (props) => {
     const outlineColor = 'var(--white)';
     const fontColor = 'var(--white)';
     return (
-        <div className='outline-button'>children</div>
+        <div className='outline-button'>{children}</div>
     );
 };
 

@@ -37,8 +37,10 @@ const AboutMe = (props) => {
             directly, I guarantee you will get nothing but my best. 
           </p>
         </div>
-        <div>
-          <img src={profile} width='300px' alt='it be me'/>
+        <div className='about-me-profile-container'>
+            <img src={profile} className='profile-pic' alt='it be me'/>
+          <div className='about-me-profile-inner'>
+          </div>
         </div>
       </div>
     </section>

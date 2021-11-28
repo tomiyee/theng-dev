@@ -20,3 +20,19 @@
     flex-direction: column;
     padding: 0 20px;
 }
+
+/* experience panel descriptions */
+
+.experience-title {
+    margin: 0px;
+}
+
+.experience-range {
+    color: rgb(117, 117, 117);
+    margin: 0;
+}
+
+.experience-description {
+    color: rgb(107, 107, 107);
+    font-size: 14px;
+}

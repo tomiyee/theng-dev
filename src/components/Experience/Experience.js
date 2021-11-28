@@ -52,16 +52,17 @@ const Experience = (props) => {
             <Tab className='experience-tab' label='MIT App Inventor' />
             <Tab className='experience-tab' label='BBot Inc.' />
             <Tab className='experience-tab' label='Stanford ASL' />
+            <Tab className='experience-tab' label='Breakthrough SV' />
           </Tabs>
           {/* The Description of the Experience on the right */}
 
           <TabPanel value={value} index={0}>
-            <h3>
+            <h3 className='experience-title'>
               <span className='color-navy'>Engineering Researcher</span> 
               <span className='color-teal'> @ MIT App Inventor</span>
             </h3>
             <p className='experience-range'>September 2018 - Present</p>
-            <ul className='color-navy'>
+            <ul className='experience-description'>
               <li>Design a Conversational AI Interface for the visual programming platform MIT App Inventor</li>
               <li>Lead week-long workshops teaching 20+ local high school students computational
 thinking and conversational AI</li>
@@ -71,30 +72,40 @@ thinking and conversational AI</li>
           </TabPanel>
           
           <TabPanel value={value} index={1}>
-            <h3>
+            <h3 className='experience-title'>
                 <span className='color-navy'>Software Engineer Intern</span> 
                 <span className='color-teal'> @ BBot Inc.</span>
             </h3>
-            <p className='experience-range'>June 2021 - August 2021</p>
-            <ul>
-              <li>Redesigned web pages facilitating customer financial transactions in a React Native framework for a
-fast-paced in-venue ordering start-up; successfully pushed to production</li>
+            <p className='experience-range'>June - August 2021</p>
+            <ul className='experience-description'>
+              <li>Redesigned web pages facilitating customer financial transactions in a React Native framework for a fast-paced in-venue ordering start-up; successfully pushed to production</li>
               <li>Developed a comprehensive front-end test suite with Cypress.io for performance-critical web pages</li>
               <li>Incorporated customer feedback into product features to improve user experience</li>
             </ul>
           </TabPanel>
           
           <TabPanel value={value} index={2}>
-            <h3>
+            <h3 className='experience-title'>
                 <span className='color-navy'>Engineering Researcher</span> 
                 <span className='color-teal'> @ Stanford Autonomous Systems Lab</span>
             </h3>
-            <p className='experience-range'>June 2017 - July 2017</p>
-            <ul>
-              <li>Developed a time series forecasting model using an LSTM neural network for use in autonomous mobility
-simulations</li>
+            <p className='experience-range'>June - July 2017</p>
+            <ul className='experience-description'>
+              <li>Developed a time series forecasting model using an LSTM neural network for use in autonomous mobility simulations</li>
               <li>Defined a custom loss function which heavily penalized over-estimation to optimize model performance</li>
               <li>Implemented Dropout as a method of determining a probability distribution of the model’s predictions</li>
+            </ul>
+          </TabPanel>
+
+          <TabPanel value={value} index={3}>
+            <h3 className='experience-title'>
+                <span className='color-navy'>Computer Science Teaching Assistant</span> 
+                <span className='color-teal'> @ Breakthrough SV</span>
+            </h3>
+            <p className='experience-range'>June 2018</p>
+            <ul className='experience-description'>
+              <li>Coached high school students on video game development in Unity</li>
+              <li>Tracked student outcome data and compiled reports for the on-site administrative team</li>
             </ul>
           </TabPanel>
         </div>
