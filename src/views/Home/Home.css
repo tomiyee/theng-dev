@@ -32,16 +32,13 @@
   max-width: var(--max-content-width);
 }
 
-* {
-  box-sizing: border-box;
-}
 
 .about-me-profile-container {
   height: 250px;
   width: 250px;
   position: relative;
   box-sizing: border-box;
-  z-index: -1;
+  z-index: 0;
 }
 
 .about-me-profile-inner {
@@ -52,11 +49,12 @@
   border-radius: 5px;
   top: 20px;
   left: 20px;
-  z-index: -2;
+  z-index: -1;
   box-sizing: border-box;
 }
 
 .profile-pic {
+  z-index: 0;
   border-radius: 5px;
   width: 100%;
 }

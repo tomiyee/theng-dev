@@ -1,5 +1,7 @@
 // import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 // import 'react-vertical-timeline-component/style.min.css';
+// import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import { HeaderUnderline } from '../HeaderUnderline';
 import './Projects.css';
 
 /**
@@ -15,7 +17,7 @@ import './Projects.css';
 const featuredProjectsData = [
   {
     title: 'Conversational AI Interface',
-    desc: 'I developed and designed a visual programming interace for conversational agents like Amazon Alexa.',
+    desc: 'A visual programming interace for conversational agents like Amazon Alexa.',
     image: '',
     tech: ['GWT', 'AWS', 'Node.js'],
     links: [
@@ -23,10 +25,10 @@ const featuredProjectsData = [
     ]
   },
   {
-    title: 'Conversational AI Interface',
-    desc: 'I developed and designed a visual programming interace for conversational agents like Amazon Alexa.',
+    title: 'Project Veritas',
+    desc: 'An application for public accountability of police brutality.',
     image: '',
-    tech: ['GWT', 'AWS', 'Node.js'],
+    tech: ['Vue.js', 'Node.js', 'MongoDB'],
     links: [
       ['github', 'github.com']
     ]
@@ -61,7 +63,6 @@ const ProjectCard = (props) => {
   return (
     <article className='project-card'>
       <div className='project-card-top'>
-        
         <div className='folder-icon'>Folder</div>
         <div className='project-links'>
           <div className='project-link'>External</div>
@@ -104,7 +105,9 @@ const Projects = (props) => {
 
   return (
     <section>
+      <br />
       <h1>Previous Projects</h1>
+      <HeaderUnderline />
       <div className='projects-content'>
         <div className='projects-container'>
           {featuredProjects}

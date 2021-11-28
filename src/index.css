@@ -7,6 +7,9 @@
   --teal: #41E2BA;
   --white: #F7F7F9;
   --white-darker: hsl(240, 14%, 90%);
+  --gray: hsl(0, 0%, 50%);
+  --gray-darker: hsl(0, 0%, 35%);
+  --gray-darkest: hsl(0, 0%, 20%);
   --yellow: #F7E733;
   --orange: #EE6C4D;
   --max-content-width: 900px;

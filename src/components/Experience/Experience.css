@@ -7,6 +7,7 @@
 .experience-content {
     width: 100%;
     max-width: var(--max-content-width);
+    min-height: 400px;
 }
 
 .experience-viewer {
