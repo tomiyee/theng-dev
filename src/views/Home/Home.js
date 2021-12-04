@@ -13,7 +13,6 @@ const Home = (props) => {
         <Projects/>
       </main>
     </div>
-    
   );
 };
 
@@ -25,16 +24,13 @@ const AboutMe = (props) => {
       <div className='about-me-content'>
         <div className='about-me-description'>
           <p>
-            Hello! My name is Tommy Heng and I enjoy developing solutions to challenges faced by members of my 
-            community. My interest in web development started in 2011, where my mission was to develop a 
-            Khan Academy knock-off tailored to my middle school. This sparked my interest in problem-solving
-            and designing software with an impact.
+          Hello! My name is Tommy Heng and I enjoy designing software with a positive community impact. My interest 
+          in web development started in 2011, where I made a Khan Academy knock-off tailored for my middle school. 
           </p>
           <p>
-            Most recently, my projects have ranged from full-stack development on a visual programming platform, to
-            designing web applications for start-ups, to even leading workshops on Conversational AI for local 
-            high school students. Whether its delivering quality work behind the desk or speaking with clients 
-            directly, I guarantee you will get nothing but my best. 
+          Most recently, my projects have ranged from full-stack development on a visual programming platform, to 
+          designing web applications for start-ups, to even leading workshops on Conversational AI for local high 
+          school students.  
           </p>
         </div>
         <div className='about-me-profile-container'>

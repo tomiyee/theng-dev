@@ -1,104 +1,122 @@
-// import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
-// import 'react-vertical-timeline-component/style.min.css';
-// import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import LaunchIcon from '@mui/icons-material/Launch';
+import StarIcon from '@mui/icons-material/Star';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import githubIconSrc from '../../assets/github.svg'
 import { HeaderUnderline } from '../HeaderUnderline';
+
 import './Projects.css';
 
 /**
  * @typedef {Object} FeaturedProjectData
  * @property {string} title - The title of the card
  * @property {string} desc  - The brief project description
- * @property {string} image - The relative path to the background image
+ * @property {string} date  - The time period of the project
  * @property {string[]} tech - The list of tech involved
  * @property {string[][]} links - A list of [icon source, external link]
  */
 
-/** @type {FeaturedProjectData[]} */
-const featuredProjectsData = [
-  {
-    title: 'Conversational AI Interface',
-    desc: 'A visual programming interace for conversational agents like Amazon Alexa.',
-    image: '',
-    tech: ['GWT', 'AWS', 'Node.js'],
-    links: [
-      ['github', 'github.com']
-    ]
-  },
-  {
-    title: 'Project Veritas',
-    desc: 'An application for public accountability of police brutality.',
-    image: '',
-    tech: ['Vue.js', 'Node.js', 'MongoDB'],
-    links: [
-      ['github', 'github.com']
-    ]
-  },
-  {
-    title: 'Conversational AI Interface',
-    desc: 'A visual programming interace for conversational agents like Amazon Alexa.',
-    image: '',
-    tech: ['GWT', 'AWS', 'Node.js'],
-    links: [
-      ['github', 'github.com']
-    ]
-  }
-]
-
-const icons = new Map();
+/** @type {FeaturedProjectData[]} A list of information on all projects*/
+const featuredProjectsData = require("./project-data.json");
 
 /**
  * 
  * @param {Object} props 
- * @param {string[]} props.projectTechList
- * @param {Map<string, string>} props.links - Maps the icon name to the link it directs to
- * @param {string} props.title 
+ * @param {FeaturedProjectData} props.projectData
  * @returns 
  */
 const ProjectCard = (props) => {
-  const { links, projectTechList, title, desc} = props;
+  const { title, desc, date, tech, links} = props.projectData;
+
+  const linkIcons = new Map([
+    ['external', <LaunchIcon/>],
+    ['github', (<img src={githubIconSrc} alt='git'/>)],
+    ['youtube', <YouTubeIcon/>],
+  ])
+
+  /** @type {Object} The style on the timeline icon element */
+  const iconStyle = {
+    background:'var(--white)', 
+    boxShadow: '0 0 0 4px var(--teal), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)'
+  };
+
+  /** @type {Object} The style on the timeline card element */
+  const timelineElemStyle = {
+    textAlign: 'left',
+    borderTop: '4px solid var(--teal)'
+  };
 
   /** @type {JSX.Element[]} Converts the list of project tech into an itemised list*/
-  const projectTechListItems = projectTechList.map((item) => (<li>{item}</li>));
+  const projectTechListItems = tech.map((item) => (<li className={'project-tech-element'}>{item}</li>));
 
   return (
-    <article className='project-card'>
-      <div className='project-card-top'>
-        <div className='folder-icon'>Folder</div>
-        <div className='project-links'>
-          <div className='project-link'>External</div>
-          <div className='project-link'>Github</div>
+    <VerticalTimelineElement
+      className="vertical-timeline-element--work"
+      date={date}
+      contentStyle={timelineElemStyle}
+      iconStyle={iconStyle}
+      icon={<FolderOutlinedIcon/>}
+    >
+      <article className='project-card'>
+        {/* The top of the project card */}
+        <div className='project-card-top'>
+
+          <div className='folder-icon'>
+            <FolderOutlinedIcon/>
+          </div>
+
+          {/* The links in the top right of the flexbox */}
+          <div className='project-links'>
+            {links.map(linkData => (
+              <div className='project-link'>
+                {linkIcons.get(linkData[0])}
+              </div>
+            ))}
+          </div>
         </div>
-          
-      </div>
-      <div className='project-card-tite'>
-        <h2>{title}</h2>
-      </div>
-      <div className='project-card-description'>
-        <p>{desc}</p>
-      </div>
-      <div className='project-card-bottom'>
-        <ul className='project-card-tech-list'>
-          {projectTechListItems}
-        </ul>
-      </div>
-    </article>
-  )
+
+        {/* The title of the card */}
+        <div className='project-card-title'>
+          <h2>{title}</h2>
+        </div>
+
+        {/* The brief description for the project below */}
+        <div className='project-card-description'>
+          <p>{desc}</p>
+        </div>
+
+        {/* The list of different technology */}
+        <div className='project-card-bottom'>
+          <ul className='project-card-tech-list'>
+            {projectTechListItems}
+          </ul>
+        </div>
+      </article>
+    </VerticalTimelineElement>
+  );
 }
 
 const Projects = (props) => {
 
-  /** @type {ProjectCard[]} */
+  const starElement = (
+    <VerticalTimelineElement 
+      icon={<StarIcon style={{fill: "var(--navy)"}}/>}
+      iconStyle={{
+        background:'var(--teal)', 
+        boxShadow: '0 0 0 4px var(--navy), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)'
+      }} 
+    />
+  );
+
+
+  /** @type {VerticalTimelineElement[]} */
   const featuredProjects = featuredProjectsData.map((data, i) => {
-    return (
-      <ProjectCard
-        key={i}
-        title={data.title}
-        desc={data.desc}
-        projectTechList={data.tech}
-        image={data.image}
-        links={data.links}
-      />
-    )
+    return (<ProjectCard 
+      key={i}
+      projectData={data}
+    />)
   });
 
   return (
@@ -107,9 +125,10 @@ const Projects = (props) => {
       <h1>Previous Projects</h1>
       <HeaderUnderline />
       <div className='projects-content'>
-        <div className='projects-container'>
+        <VerticalTimeline lineColor={ 'var(--navy)' }>
           {featuredProjects}
-        </div>
+          {starElement}
+        </VerticalTimeline>
       </div>
     </section>
   );

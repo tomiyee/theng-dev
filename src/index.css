@@ -5,8 +5,8 @@
   --navy: #2B2D42;
   --navy-lighter: hsl(235, 21%, 26%);
   --teal: #41E2BA;
-  --white: #F7F7F9;
-  --white-darker: hsl(240, 14%, 90%);
+  --white: hsl(240, 14%, 97%);
+  --white-darker: hsl(240, 14%, 93%);
   --gray: hsl(0, 0%, 50%);
   --gray-darker: hsl(0, 0%, 35%);
   --gray-darkest: hsl(0, 0%, 20%);

@@ -20,7 +20,7 @@ const TabPanel = (props) => {
       {...other}
     >
       {value === index && (
-        <Typography style={{'text-align': 'left'}}>{children}</Typography>
+        <Typography style={{'textAlign': 'left'}}>{children}</Typography>
       )}
     </div>
   );

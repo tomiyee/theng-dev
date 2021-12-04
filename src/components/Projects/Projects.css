@@ -1,15 +1,6 @@
 .project-card {
-    display: inline;
-    width: 200px;
-    padding: 1em;
-    border: 2px solid var(--navy);
     display: flex;
     flex-direction: column;
-}
-
-.projects-content {
-    display: flex;
-    justify-content: center;
 }
 
 .projects-container {
@@ -23,10 +14,26 @@
     justify-content: space-between;
 }
 
+.project-tech-element {
+    margin-bottom: 0;
+}
+
+/* The container for all links in the top right of the project card */
+.project-links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.project-link:hover{
+    cursor: pointer;
+}
+
 .project-card-tech-list {
     padding: 0;
     color: var(--gray);
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
+    justify-self: end;
     list-style-type: none;
+    gap:30px;
 }

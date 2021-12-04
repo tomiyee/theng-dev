@@ -1,6 +1,5 @@
 .home-content {
   width: 100%;
-  max-width: 1600px;
   min-height: 100vh;
   margin: 0px auto;
 }
@@ -9,7 +8,7 @@
   margin: 0px auto;
 }
 
-.home-content section:nth-child(odd) {
+.home-content section:nth-child(even) {
   background-color: var(--white-darker);
 }
 

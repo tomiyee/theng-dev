@@ -1,0 +1,41 @@
+[
+    {
+        "title": "MIT Conversational AI Interface",
+        "desc": "A visual programming interace for conversational agents like Amazon Alexa. A video demonstration is linked above.",
+        "date": "Fall 2018 - Fall 2021",
+        "tech": ["GWT", "AWS", "Node.js"],
+        "links": [
+            ["youtube", "https://youtu.be/_D8v3H71074"]
+        ]
+    },
+    {
+        "title": "Project Veritas",
+        "desc": "An web-application for public accountability of police brutality. Users submit reports and provide details on a map UI.",
+        "date": "Fall 2021",
+        "tech": ["Vue.js", "Node.js", "MongoDB", "RESTful API", "Vuetify"],
+        "links": []
+    },
+    {
+        "title": "Tetris AI Interface",
+        "desc": "A platform for testing and comparing the performance between different Tetris AI.",
+        "date": "Summer 2021",
+        "tech": ["Python3", "Tensorflow"],
+        "links": [
+            ["github", "https://github.com/tomiyee/tetris-python"]
+        ]
+    },
+    {
+        "title": "Composer Similarity Ranker",
+        "desc": "A computational music theory project. Compares the chord progression in a song to the patterns of a known composer. A larger number is given if the song closely matches the composer's music style.",
+        "date": "Fall 2018",
+        "tech": ["Python", "Computational Music Theory", "Data Science"],
+        "links": []
+    },
+    {
+        "title": "Author AI",
+        "desc": "A text-generation AI hosted on a web server, which generates text in the style of different authors or book series like Dr. Seuss or Harry Potter.",
+        "date": "Fall 2018",
+        "tech": ["Python3", "Tensorflow", "NLP", "AI"],
+        "links": []
+    }
+  ]
