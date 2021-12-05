@@ -2,9 +2,17 @@
 
 :root {
   /* Color Palette Selection */
-  --navy: #2B2D42;
-  --navy-lighter: hsl(235, 21%, 26%);
+  --navy-lightest: hsl(235, 21%, 32%);
+  --navy-lighter: hsl(235, 21%, 25%);
+  --navy: hsl(235, 21%, 21%);
+  --navy-darker: hsl(235, 21%, 17%);
+  --navy-darker: hsl(235, 21%, 12%);
+
+  --teal-lighter: hsl(165, 74%, 63%);
   --teal: #41E2BA;
+  --teal-darker: hsl(165, 74%, 52%);
+  --teal-darker: hsl(165, 74%, 42%);
+
   --white: hsl(240, 14%, 97%);
   --white-darker: hsl(240, 14%, 93%);
   --gray: hsl(0, 0%, 50%);

@@ -1,11 +1,39 @@
 import './Footer.css';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub'
+
+/**
+ * 
+ * @param {Object} props 
+ * @param {JSX.Element} props.icon - The icon 
+ * @param {string} props.link
+ * @returns 
+ */
+const SocialIcon = (props) => {
+
+  const {icon, link, ...other} = props;
+
+  return (
+    <a href={link} style={{color: 'inherit'}}>
+      <div className={'social-icon'} {...other}>
+        {icon}
+      </div>
+    </a>
+  );
+}
+
 
 const Footer = (props) => {
-
-  const icons = (<div className='flex row'>Icons will go here</div>);
-  const info = (<div className='footnote'></div>)
+  const {...other} = props;
+  const icons = (
+    <div className='icons'>
+      <SocialIcon icon={<LinkedInIcon className={'footer-icon'}/>} link={'https://www.linkedin.com/in/tommy-seng-heng/'} />
+      <SocialIcon icon={<GitHubIcon className={'footer-icon'}/>} link={'https://www.github.com/tomiyee'} />
+    </div>
+  );
+  const info = (<div className='footnote'>TOMMY HENG <span style={{color: 'var(--orange)'}}>©2021</span></div>);
   return (
-    <footer>
+    <footer {...other}>
       {icons}
       {info}
     </footer>
