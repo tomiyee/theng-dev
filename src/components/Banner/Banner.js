@@ -54,7 +54,7 @@ function Banner() {
   }, []);
 
   return (
-    <section className='banner'>
+    <section className='banner' id='banner'>
       {canvasJsx}
       <div className='banner-text'>Hello, I'm <span className='highlight'>Tommy Heng</span>.</div>
     </section>

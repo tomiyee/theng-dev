@@ -1,5 +1,6 @@
 import React from "react";
 import "./Navbar.css";
+import { Link } from 'react-router-dom';
 import { OutlineButton } from '../OutlineButton';
 
 /**
@@ -11,14 +12,14 @@ const Navbar = props => {
       <div className='navbar-content'>
         {/* The Navbar Links */}
         <div className='navbar-links'>
-          <div className='navbar-link'>HOME</div>
-          <div className='navbar-link'>ABOUT</div>
-          <div className='navbar-link'>PORTFOLIO</div>
-          <div className='navbar-link'>CONTACT</div>
+          <a href='#banner'><div className='navbar-link'>HOME</div></a>
+          <a href='#about'><div className='navbar-link'>ABOUT</div></a>
+          <a href='#experience'><div className='navbar-link'>EXPERIENCE</div></a> 
+          <a href='#projects'><div className='navbar-link'>PORTFOLIO</div></a> 
         </div>
         {/* Resume Button in the top right */}
         <div>
-          <OutlineButton>Resume</OutlineButton>
+          {/* <OutlineButton>RESUME</OutlineButton> */}
         </div>
       </div>
     </nav>

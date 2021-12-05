@@ -48,7 +48,7 @@ const Experience = (props) => {
   };
 
   return (
-    <section className='experience-section' {...other}>
+    <section id='experience' className='experience-section' {...other}>
       <div className='experience-content'>
         <h1>Where I've Been</h1>
         <HeaderUnderline />

@@ -14,7 +14,7 @@ const SocialIcon = (props) => {
   const {icon, link, ...other} = props;
 
   return (
-    <a href={link} style={{color: 'inherit'}}>
+    <a href={link} style={{color: 'inherit'}} target="_blank" rel="noreferrer">
       <div className={'social-icon'} {...other}>
         {icon}
       </div>

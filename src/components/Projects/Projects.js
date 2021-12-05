@@ -70,9 +70,11 @@ const ProjectCard = (props) => {
           {/* The links in the top right of the flexbox */}
           <div className='project-links'>
             {links.map(linkData => (
-              <div className='project-link'>
-                {linkIcons.get(linkData[0])}
-              </div>
+              <a href={linkData[1]} style={{color: 'inherit'}} target="_blank" rel="noreferrer">
+                <div className='project-link'>
+                  {linkIcons.get(linkData[0])}
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -120,7 +122,7 @@ const Projects = (props) => {
   });
 
   return (
-    <section>
+    <section id='projects'>
       <br />
       <h1>Previous Projects</h1>
       <HeaderUnderline />

@@ -18,7 +18,7 @@ const Home = (props) => {
 
 const AboutMe = (props) => {
   return (
-    <section className='about-me-section flex col'>
+    <section id='about' className='about-me-section flex col'>
       <h1>About Me</h1>
       <HeaderUnderline />
       <div className='about-me-content'>
