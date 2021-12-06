@@ -2,7 +2,7 @@ import './Home.css';
 import { Experience } from '../../components/Experience';
 import { Projects } from '../../components/Projects';
 import { HeaderUnderline } from '../../components/HeaderUnderline';
-import profile from '../../assets/profile.jpg'
+import profile from '../../assets/profile.jpg';
 
 const Home = (props) => {
   return (
@@ -33,9 +33,11 @@ const AboutMe = (props) => {
           school students.  
           </p>
         </div>
-        <div className='about-me-profile-container'>
-          <img src={profile} className='profile-pic' alt='it be me'/>
-          <div className='about-me-profile-inner'></div>
+        <div className='profile-pic-section'>
+          <div className='about-me-profile-container'>
+            <img src={profile} className='profile-pic' alt='it be me'/>
+            <div className='about-me-profile-inner'></div>
+          </div>
         </div>
       </div>
     </section>

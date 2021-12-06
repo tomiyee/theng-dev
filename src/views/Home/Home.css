@@ -13,15 +13,17 @@
   background-color: var(--white-darker);
 }
 
+/* ABOUT ME CSS */
+
 .about-me-section {
   display: flex;
   justify-content: center;
 }
 
 .about-me-content {
-  display: grid;
-  grid-template-columns: 4fr 2fr;
-  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0px 40px;
   gap: 50px;
 }
 
@@ -32,6 +34,28 @@
 .about-me-content {
   max-width: var(--max-content-width);
 }
+
+.profile-pic-section {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .about-me-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    padding-bottom: 40px;
+    gap: 50px;
+  }
+  
+  .profile-pic-section {
+    grid-area: 1 / 2 / span 1 / span 1;
+  }
+}
+
+
+
 
 
 .about-me-profile-container {

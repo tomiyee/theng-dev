@@ -49,7 +49,7 @@ const ProjectCard = (props) => {
   };
 
   /** @type {JSX.Element[]} Converts the list of project tech into an itemised list*/
-  const projectTechListItems = tech.map((item) => (<li className={'project-tech-element'}>{item}</li>));
+  const projectTechListItems = tech.map((item, i) => (<li key={i} className={'project-tech-element'}>{item}</li>));
 
   return (
     <VerticalTimelineElement
@@ -69,8 +69,8 @@ const ProjectCard = (props) => {
 
           {/* The links in the top right of the flexbox */}
           <div className='project-links'>
-            {links.map(linkData => (
-              <a href={linkData[1]} style={{color: 'inherit'}} target="_blank" rel="noreferrer">
+            {links.map((linkData, i) => (
+              <a key={i} href={linkData[1]} style={{color: 'inherit'}} target="_blank" rel="noreferrer">
                 <div className='project-link'>
                   {linkIcons.get(linkData[0])}
                 </div>
