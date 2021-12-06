@@ -1,7 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import { Link } from 'react-router-dom';
-import { OutlineButton } from '../OutlineButton';
+import Pdf from '../../assets/tommy-heng-resume.pdf';
 
 /**
  * Creates a navbar
@@ -18,9 +17,12 @@ const Navbar = props => {
           <a href='#projects'><div className='navbar-link'>PORTFOLIO</div></a> 
         </div>
         {/* Resume Button in the top right */}
-        <div>
-          {/* <OutlineButton>RESUME</OutlineButton> */}
-        </div>
+        <a 
+          href={Pdf} 
+          target='_blank' 
+          rel='noreferrer' 
+          className='outline-button'
+        >RESUME</a>
       </div>
     </nav>
   );
