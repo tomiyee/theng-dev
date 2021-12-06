@@ -11,15 +11,17 @@ import './Projects.css';
 
 /**
  * @typedef {Object} FeaturedProjectData
+ * @property {boolean} featured - If true, shown on the vertical timeline
  * @property {string} title - The title of the card
  * @property {string} desc  - The brief project description
  * @property {string} date  - The time period of the project
+ * @property {string} image - The image preview of the project
  * @property {string[]} tech - The list of tech involved
  * @property {string[][]} links - A list of [icon source, external link]
  */
 
 /** @type {FeaturedProjectData[]} A list of information on all projects*/
-const featuredProjectsData = require("./project-data.json");
+const featuredProjectsData = require("../../assets/project-data.json").filter(projectData => projectData.featured);
 
 /**
  * 
