@@ -1,1 +1,0 @@
-export { default as ProjectVeritas } from './ProjectVeritas.js';

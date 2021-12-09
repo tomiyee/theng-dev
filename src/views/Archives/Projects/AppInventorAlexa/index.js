@@ -1,1 +1,0 @@
-export { default as AppInventorAlexa } from './AppInventorAlexa.js';

@@ -27,7 +27,7 @@ const featuredProjectsData = require("../../assets/project-data.json").filter(pr
  * 
  * @param {Object} props 
  * @param {FeaturedProjectData} props.projectData
- * @returns 
+ * @returns {JSX.Element}
  */
 const ProjectCard = (props) => {
   const { title, desc, date, tech, links} = props.projectData;
@@ -36,7 +36,7 @@ const ProjectCard = (props) => {
     ['external', <LaunchIcon/>],
     ['github', (<img src={githubIconSrc} alt='git'/>)],
     ['youtube', <YouTubeIcon/>],
-  ])
+  ]);
 
   /** @type {Object} The style on the timeline icon element */
   const iconStyle = {

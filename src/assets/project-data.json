@@ -2,7 +2,7 @@
     {
         "featured": false,
         "title": "Dynamic Infrared QR Display",
-        "desc": "",
+        "desc": "A compact, dynamic infrared LED array display integrated with sensors to display information while minimizing impact on aesthetic and form factor.",
         "date": "Fall 2021",
         "image": "",
         "tech": ["Electrical Engineering", "Computer Vision", "Sensor"],
