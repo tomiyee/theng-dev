@@ -48,15 +48,11 @@
     padding-bottom: 40px;
     gap: 50px;
   }
-  
+
   .profile-pic-section {
     grid-area: 1 / 2 / span 1 / span 1;
   }
 }
-
-
-
-
 
 .about-me-profile-container {
   height: 250px;

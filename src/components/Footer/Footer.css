@@ -10,11 +10,11 @@ footer {
 }
 
 .footnote {
-  color: rgba(247,247,249, 0.35);
+  color: rgba(247, 247, 249, 0.35);
   text-align: center;
 }
 
-.icons{
+.icons {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,7 +29,6 @@ footer {
   align-items: center;
   transition: background-color 0.2s 0s;
 }
-
 
 .social-icon:hover {
   background: var(--orange);
