@@ -2,8 +2,11 @@
  * A Simple Vector
  */
 class Vector2D {
-  constructor(x, y) {
-    this.dimensions = 2;
+  x: number;
+  y: number;
+  readonly dimensions = 2;
+
+  constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
@@ -12,25 +15,18 @@ class Vector2D {
    * Adds the other vector to this vector. Unless told otherwise, will NOT override
    * this vector and will instead return a different vector.
    *
-   * @param {Vector} other - The second vector
-   * @param {Boolean} [override] - false by default, if true, will override this vector's values
+   * @param other - The second vector
+   * @param override - false by default, if true, will override this vector's values
    * @ returns {Vector} Returns a new vector with the result of the addition, otherwise returns this
    */
-  add(other, override) {
+  add(other: Vector2D, override?: boolean): Vector2D {
     if (!override) return new Vector2D(this.x + other.x, this.y + other.y);
     this.x += other.x;
     this.y += other.y;
     return this;
   }
 
-  /**
-   * Subtracts the other vector from the current one
-   *
-   * @param  {Vector} other - The other vector
-   * @param  {type} [override] - Default falseIf true, overr
-   * @return {Vector} A new vector that is the result of subtraction.
-   */
-  subtract(other, override) {
+  subtract(other: Vector2D, override?: boolean): Vector2D {
     if (!override) return new Vector2D(this.x - other.x, this.y - other.y);
     this.x -= other.x;
     this.y -= other.y;
@@ -39,37 +35,34 @@ class Vector2D {
 
   /**
    * Calculates the Euclidean distance between vectors
-   * @param {Vector(this.y - other.y) ** 2} other - The other vector
+   * @param {Vector} other - The other vector
    * @returns {number} distance between the two vectors
    */
-  distanceTo(other) {
+  distanceTo(other: Vector2D): number {
     return Math.sqrt((this.x - other.x) ** 2 + (this.y - other.y) ** 2);
   }
 
   /**
    * Returns true if the values in the vectors are identical
-   * @param {Vector} other - The other vector
-   * @returns {Boolean} true if the vectors are the same, false otherwise
+   * @param other - The other vector
+   * @returns true if the vectors are the same, false otherwise
    */
-  equals(other) {
+  equals(other: Vector2D): boolean {
     return this.x === other.x && this.y === other.y;
   }
 
-  /**
-   * Returns an identical vecotr with all the properties
-   * @returns {Vector2D} a copy of this vector
-   */
-  copy() {
+  /** @returns a copy of this vector  */
+  copy(): Vector2D {
     return new Vector2D(this.x, this.y);
   }
 
   /**
    * Randomly generates the x and y components
-   * @param {number} maxX - The maximum value for the x component to take
-   * @param {number} maxY - The maximum value for the y component to take
-   * @returns {Vector2D} This vector for chaining
+   * @param maxX - The maximum value for the x component to take
+   * @param maxY - The maximum value for the y component to take
+   * @returns  This vector for chaining
    */
-  randomize(maxX, maxY) {
+  randomize(maxX: number, maxY: number): Vector2D {
     this.x = Math.random() * maxX;
     this.y = Math.random() * maxY;
     return this;
@@ -80,10 +73,10 @@ class Vector2D {
    * beginning with the other vector and going counter-clockwise
    * until hitting the current angle
    *
-   * @param  {Vector2D} other - The other vector
-   * @return {Number} The relative angle in radians
+   * @param other - The other vector
+   * @return The relative angle in radians
    */
-  getRelativeAngle(other) {
+  getRelativeAngle(other: Vector2D): number {
     // finds the angles of the vectors relative to the horizontal
     // then subtracts these angles to get the angle of this vector
     // relative to the other vector
@@ -96,45 +89,43 @@ class Vector2D {
   /**
    * Determines the smallest positive angle between the two vectors
    *
-   * @param  {Vector2D} other - The other vector
-   * @return {Number} the angle between the vectors in radians
+   * @param other - The other vector
+   * @return the angle between the vectors in radians
    */
-  getAngle(other) {
+  getAngle(other: Vector2D): number {
     return Math.acos(this.dot(other) / (this.length() * other.length()));
   }
 
   /**
    * Scales the values of this vector by the given scaling factor
-   * @param {Number} factor - The magnitude to be scaled
-   * @returns {Vector} This vector
+   * @param factor - The magnitude to be scaled
+   * @returns This vector
    */
-  scale(factor) {
+  scale(factor: number): Vector2D {
     this.x *= factor;
     this.y *= factor;
     return this;
   }
 
-  /**
-   * Returns the Euclidean length of the vector
-   *
-   * @returns {number} The length of the vector
-   */
-  length() {
+  /** @returns The Euclidean len of the vector */
+  length(): number {
     return Math.sqrt(this.x ** 2 + this.y ** 2);
   }
 
-  setLength(l) {
+  setLength(l: number): Vector2D {
     const len = Math.sqrt(this.x ** 2 + this.y ** 2);
     this.x *= l / len;
     this.y *= l / len;
+    return this;
   }
 
-  setMax(l) {
+  setMax(l: number): Vector2D {
     const len = Math.sqrt(this.x ** 2 + this.y ** 2);
     if (len > l) {
       this.x *= l / len;
       this.y *= l / len;
     }
+    return this;
   }
 
   /**
@@ -142,14 +133,12 @@ class Vector2D {
    * @param {Vector2D} other - the other vector to be dot product-ing(?)
    * @returns {number} The dot product of the two 2D vectors
    */
-  dot(other) {
+  dot(other: Vector2D): number {
     return this.x * other.x + this.y * other.y;
   }
 
-  /**
-   * @returns {String}  A representation of this vector
-   */
-  toString() {
+  /** @returns A string repr of this vector */
+  toString(): string {
     return `Vector2D <${this.x}, ${this.y}>`;
   }
 }

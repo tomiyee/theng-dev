@@ -1,6 +1,4 @@
-import './Page404.css';
-
-const Page404 = (props) => {
+const Page404: React.FC = () => {
   return <h1>Page404</h1>;
 };
 

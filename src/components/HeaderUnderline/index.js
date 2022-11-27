@@ -1,1 +1,1 @@
-export { default as HeaderUnderline } from './HeaderUnderline.js';
+export { default as HeaderUnderline } from './HeaderUnderline';

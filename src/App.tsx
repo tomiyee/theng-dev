@@ -1,20 +1,20 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
+import Footer from './components/Footer';
 import { Banner } from './components/Banner';
-import { Home } from './views/Home';
+import Home from './views/Home';
 import { Archives } from './views/Archives';
-import { Page404 } from './views/Page404';
+import Page404 from './views/Page404';
 
-function App() {
+const App: React.FC = () => {
   const homePaths = ['/', '/home', '/theng-dev'];
   return (
     <div className="App">
       {/* Only show the Banner if we are on the home screen */}
       <Routes>
         {homePaths.map((p, i) => (
-          <Route key={`route-${i}`} exact path={p} element={<Banner />} />
+          <Route key={`route-${i}`} path={p} element={<Banner />} />
         ))}
       </Routes>
       {/* The navigation bar */}
@@ -22,10 +22,10 @@ function App() {
       {/* The content of the page, which may change depending on the path */}
       <Routes>
         {homePaths.map((p, i) => (
-          <Route key={`routes-${i}`} exact path={p} element={<Home />} />
+          <Route key={`routes-${i}`} path={p} element={<Home />} />
         ))}
-        <Route exact path="archives" element={<Archives />} />
-        <Route exact path="*" element={<Page404 />} />
+        <Route path="archives" element={<Archives />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
 
       <Footer />

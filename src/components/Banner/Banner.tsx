@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
-import Vector2D from './Vector2D.js';
+import { useEffect } from 'react';
+import Vector2D from './Vector2D';
 import './Banner.css';
+import { styled } from '@mui/material';
 
 const BG_COLOR = '#2B2D42';
 const MIN_ALPHA = 0.35;
 const BOID_COLOR = { r: 247, g: 247, b: 249 };
 const BOID_SPEED = 3;
 const BOID_RADIUS = 6;
-let A_FACTOR = 0.3;
-let C_FACTOR = 0.04;
-let R_FACTOR = 1.8;
-let boids = [];
-let canvas, ctx;
+const A_FACTOR = 0.3;
+const C_FACTOR = 0.04;
+const R_FACTOR = 1.8;
+const BOIDS: Boid[] = [];
+let canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D;
 const FLOCK_RADIUS = 40;
 let WIDTH = 900,
   HEIGHT = 600;
@@ -22,9 +23,9 @@ let mouseX = 0,
 /**
  * Banner is the banner on the home page of my portfolio. It has the flocking simulator.
  */
-function Banner() {
+const Banner: React.FC = () => {
   const canvasJsx = (
-    <canvas
+    <BannerCanvas
       className="banner-bg-canvas"
       width="100%"
       height="100%"
@@ -45,13 +46,15 @@ function Banner() {
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * window.innerHeight;
     const boid = new Boid(x, y);
-    boids.push(boid);
+    BOIDS.push(boid);
   }
 
   useEffect(() => {
     /* Called upon mount */
-    canvas = document.getElementsByClassName('banner-bg-canvas')[0];
-    ctx = canvas.getContext('2d');
+    canvas = document.getElementsByClassName(
+      'banner-bg-canvas'
+    )[0] as HTMLCanvasElement;
+    ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
     window.requestAnimationFrame(update);
   }, []);
 
@@ -59,44 +62,58 @@ function Banner() {
     <section className="banner" id="banner">
       {canvasJsx}
       <div className="banner-text">
-        Hello, I'm <span className="highlight">Tommy Heng</span>.
+        {"Hello, I'm "}
+        <span className="highlight">Tommy Heng</span>.
       </div>
     </section>
   );
-}
+};
 
 /**
- * Draws a rectangle onto the global ctx variable
- * @param {Number} x - The x coordinate
- * @param {Number} y - The y coordinate
- * @param {Number} w - The width of the rectangle
- * @param {Number} h - The height of the rectangle
- * @param {String} c - The color of the rectangle
+ * Draws a rectnalge onto the banner's global context variable
+ * @param x The x coordinate
+ * @param y The y coordinate
+ * @param w The width of the rectangle
+ * @param h The height of the rectangle
+ * @param c The color of the rectangle
  */
-function drawRectangle(x, y, w, h, c) {
+const drawRectangle = (
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  c: string
+) => {
   ctx.fillStyle = c;
   ctx.fillRect(x, y, w, h);
-}
+};
 
 /**
  * Calculates the next position of each boid based on the localized rules
  */
-function update() {
+const update = () => {
   // black background
   HEIGHT = window.innerHeight;
   WIDTH = window.innerWidth;
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   drawRectangle(0, 0, WIDTH, HEIGHT, BG_COLOR);
-  for (let i = 0; i < boids.length; i++) {
-    boids[i].update(boids);
-    boids[i].draw();
+  for (let i = 0; i < BOIDS.length; i++) {
+    BOIDS[i].update(BOIDS);
+    BOIDS[i].draw();
   }
   window.requestAnimationFrame(update);
-}
+};
+
+export default Banner;
 
 class Boid {
-  constructor(x, y) {
+  // Properties
+  position: Vector2D;
+  velocity: Vector2D;
+  acceleration: Vector2D;
+
+  constructor(x: number, y: number) {
     this.position = new Vector2D(
       !isNaN(x) ? x : Math.random() * WIDTH,
       !isNaN(y) ? y : Math.random() * HEIGHT
@@ -111,20 +128,16 @@ class Boid {
    * Does NOT find the edge cases, where a boid is on the edge and could potentially
    * be influenced by one on the opposite edge.
    *
-   * @param  {Boid[]} boids A list of boids
-   * @return {Boid[]}       A subset of boids which are within FLOCK_RADIUS of this
+   * @param boids A list of boids
+   * @return A subset of boids which are within FLOCK_RADIUS of this
    */
-  localFlock(boids) {
+  localFlock(boids: Boid[]) {
     const flock = [];
-    for (let i = 0; i < boids.length; i++)
-      if (
-        Math.sqrt(
-          (this.position.x - boids[i].position.x) ** 2 +
-            (this.position.y - boids[i].position.y) ** 2
-        ) < FLOCK_RADIUS &&
-        boids[i] !== this
-      )
+    for (let i = 0; i < boids.length; i++) {
+      if (boids[i] === this) continue;
+      if (this.position.distanceTo(boids[i].position) < FLOCK_RADIUS)
         flock.push(boids[i]);
+    }
     return flock;
   }
 
@@ -132,11 +145,11 @@ class Boid {
    * align - First force, wehre the boid will attempt to align its velocity with
    * the average of its local flock.
    *
-   * @param  {Boid[]} local A list of boids local to this one
-   * @return {Vector2D}       A vector repr this force's influence
+   * @param local A list of boids local to this one
+   * @return A vector repr this force's influence
    */
-  align(local) {
-    let force = new Vector2D(0, 0);
+  align(local: Boid[]) {
+    const force = new Vector2D(0, 0);
     for (let i = 0; i < local.length; i++) {
       force.add(local[i].velocity, true);
     }
@@ -148,17 +161,17 @@ class Boid {
    * cohesion - Second force, wehre the boid will attempt to get closer to the
    * "center of gravity" of its local flock.
    *
-   * @param  {Vector2D} local A list of boids local to this one
-   * @return {Vector2D}       A vector repr this force's influence
+   * @param  local A list of boids local to this one
+   * @return A vector repr this force's influence
    */
-  cohesion(local) {
+  cohesion(local: Boid[]) {
     const avg = { x: 0, y: 0 };
     for (let i = 0; i < local.length; i++) {
       avg.x += local[i].position.x;
       avg.y += local[i].position.y;
     }
     const len = Math.sqrt(avg.x ** 2 + avg.y ** 2);
-    let force = new Vector2D(
+    const force = new Vector2D(
       avg.x / len - this.position.x,
       avg.y / len - this.position.y
     );
@@ -170,11 +183,11 @@ class Boid {
    * repulsion - Third force, wehre the boid will attempt to get further from the
    * "center of gravity" of its local flock to prevent "collisions" or overlap
    *
-   * @param  {Vector2D} local A list of boids local to this one
-   * @return {Vector2D}       A vector repr this force's influence
+   * @param  local A list of boids local to this one
+   * @return A vector repr this force's influence
    */
-  repulsion(local) {
-    let force = new Vector2D(0, 0);
+  repulsion(local: Boid[]) {
+    const force = new Vector2D(0, 0);
     for (let i = 0; i < local.length; i++) {
       force.x += 1 / (this.position.x - local[i].position.x);
       force.y += 1 / (this.position.y - local[i].position.y);
@@ -226,15 +239,15 @@ class Boid {
     ctx.fill();
   }
 
-  update(boids) {
+  update(boids: Boid[]) {
     const local = this.localFlock(boids);
     if (local.length > 0) {
       // Clears any existing acceleration
       this.acceleration.scale(0);
       // Calculates the sum of the three forces described above
-      let forceAlign = this.align(local);
-      let forceCohesion = this.cohesion(local);
-      let forceRepulsion = this.repulsion(local);
+      const forceAlign = this.align(local);
+      const forceCohesion = this.cohesion(local);
+      const forceRepulsion = this.repulsion(local);
       this.acceleration.add(forceAlign, true);
       this.acceleration.add(forceCohesion, true);
       this.acceleration.add(forceRepulsion, true);
@@ -255,4 +268,11 @@ class Boid {
   }
 }
 
-export default Banner;
+const BannerCanvas = styled('canvas')({
+  position: 'absolute',
+  zIndex: 0,
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+});

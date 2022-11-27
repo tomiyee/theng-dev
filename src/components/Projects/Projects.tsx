@@ -4,54 +4,26 @@ import {
 } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
-import LaunchIcon from '@mui/icons-material/Launch';
 import StarIcon from '@mui/icons-material/Star';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import githubIconSrc from '../../assets/github.svg';
 import { HeaderUnderline } from '../HeaderUnderline';
 
 import './Projects.css';
+import projectData from '../../assets/projectData';
+import { ProjectData } from '../../types';
+import LinkIcon from '../LinkIcon';
 
-/**
- * @typedef {Object} FeaturedProjectData
- * @property {boolean} featured - If true, shown on the vertical timeline
- * @property {string} title - The title of the card
- * @property {string} desc  - The brief project description
- * @property {string} date  - The time period of the project
- * @property {string} image - The image preview of the project
- * @property {string[]} tech - The list of tech involved
- * @property {string[][]} links - A list of [icon source, external link]
- */
+const ProjectCard: React.FC<{
+  projectData: ProjectData;
+}> = ({ projectData: project }) => {
+  const { title, desc, date, tech, links } = project;
 
-/** @type {FeaturedProjectData[]} A list of information on all projects*/
-const featuredProjectsData = require('../../assets/project-data.json').filter(
-  (projectData) => projectData.featured
-);
-
-/**
- *
- * @param {Object} props
- * @param {FeaturedProjectData} props.projectData
- * @returns {JSX.Element}
- */
-const ProjectCard = (props) => {
-  const { title, desc, date, tech, links } = props.projectData;
-
-  const linkIcons = new Map([
-    ['external', <LaunchIcon />],
-    ['github', <img src={githubIconSrc} alt="git" />],
-    ['youtube', <YouTubeIcon />],
-  ]);
-
-  /** @type {Object} The style on the timeline icon element */
-  const iconStyle = {
+  const iconStyle: React.CSSProperties = {
     background: 'var(--white)',
     boxShadow:
       '0 0 0 4px var(--teal), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)',
   };
 
-  /** @type {Object} The style on the timeline card element */
-  const timelineElemStyle = {
+  const timelineElemStyle: React.CSSProperties = {
     textAlign: 'left',
     borderTop: '4px solid var(--teal)',
   };
@@ -88,7 +60,9 @@ const ProjectCard = (props) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div className="project-link">{linkIcons.get(linkData[0])}</div>
+                <div className="project-link">
+                  <LinkIcon icon={linkData[0]} link={linkData[1]} />
+                </div>
               </a>
             ))}
           </div>
@@ -113,7 +87,7 @@ const ProjectCard = (props) => {
   );
 };
 
-const Projects = (props) => {
+const Projects: React.FC = () => {
   const starElement = (
     <VerticalTimelineElement
       icon={<StarIcon style={{ fill: 'var(--navy)' }} />}
@@ -125,10 +99,9 @@ const Projects = (props) => {
     />
   );
 
-  /** @type {VerticalTimelineElement[]} */
-  const featuredProjects = featuredProjectsData.map((data, i) => {
-    return <ProjectCard key={i} projectData={data} />;
-  });
+  const featuredProjects = projectData
+    .filter((project) => project.featured)
+    .map((data) => <ProjectCard projectData={data} key={data.title} />);
 
   return (
     <section id="projects">

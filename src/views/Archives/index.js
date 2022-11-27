@@ -1,1 +1,1 @@
-export { default as Archives } from './Archives.js';
+export { default as Archives } from './Archives';

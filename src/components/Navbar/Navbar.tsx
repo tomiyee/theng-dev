@@ -1,11 +1,9 @@
-import React from 'react';
-import './Navbar.css';
-import Pdf from '../../assets/tommy-heng-resume.pdf';
 
+import './Navbar.css';
 /**
  * Creates a navbar
  */
-const Navbar = (props) => {
+const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-content">
@@ -26,7 +24,7 @@ const Navbar = (props) => {
         </div>
         {/* Resume Button in the top right */}
         <a
-          href={Pdf}
+          href={require('../../assets/tommy-heng-resume.pdf')}
           target="_blank"
           rel="noreferrer"
           className="outline-button"
