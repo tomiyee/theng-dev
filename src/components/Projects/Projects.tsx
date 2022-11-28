@@ -5,12 +5,13 @@ import {
 import 'react-vertical-timeline-component/style.min.css';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import StarIcon from '@mui/icons-material/Star';
-import { HeaderUnderline } from '../HeaderUnderline';
+import HeaderUnderline from '../HeaderUnderline';
 
 import './Projects.css';
 import projectData from '../../assets/projectData';
 import { ProjectData } from '../../types';
 import LinkIcon from '../LinkIcon';
+import { Stack } from '@mui/material';
 
 const ProjectCard: React.FC<{
   projectData: ProjectData;
@@ -104,17 +105,14 @@ const Projects: React.FC = () => {
     .map((data) => <ProjectCard projectData={data} key={data.title} />);
 
   return (
-    <section id="projects">
-      <br />
+    <Stack component={'section'} alignItems='center' id="projects">
       <h1>Previous Projects</h1>
       <HeaderUnderline />
-      <div className="projects-content">
-        <VerticalTimeline lineColor={'var(--navy)'}>
-          {featuredProjects}
-          {starElement}
-        </VerticalTimeline>
-      </div>
-    </section>
+      <VerticalTimeline lineColor={'var(--navy)'}>
+        {featuredProjects}
+        {starElement}
+      </VerticalTimeline>
+    </Stack>
   );
 };
 

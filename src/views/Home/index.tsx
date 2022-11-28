@@ -1,28 +1,26 @@
 import './Home.css';
 import { Experience } from '../../components/Experience';
 import { Projects } from '../../components/Projects';
-import { HeaderUnderline } from '../../components/HeaderUnderline';
+import HeaderUnderline from '../../components/HeaderUnderline';
 import profile from '../../assets/profile.jpg';
 import { styled, useTheme } from '@mui/material/styles';
-import { Box, Divider, Stack, Typography, useMediaQuery } from '@mui/material';
+import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
 
 const Home: React.FC = () => (
-  <div>
-    <main className="home-content">
-      <AboutMe />
-      <Experience />
-      <Projects />
-    </main>
-  </div>
+  <main className="home-content">
+    <AboutMe />
+    <Experience />
+    <Projects />
+  </main>
 );
 
 const AboutMe: React.FC = () => {
   const theme = useTheme();
   const matchDownSm = useMediaQuery(theme.breakpoints.down('sm'));
   return (
-    <Stack component={'section'} alignItems="center" maxWidth={'var(--max-content-width)'} divider={
-      <Divider flexItem color="var(--navy)" />}>
+    <Stack component={'section'} alignItems="center" maxWidth={'var(--max-content-width)'}>
       <h1>About Me</h1>
+      <HeaderUnderline/>
       <AboutMeStack direction={matchDownSm ? 'column' : 'row'} spacing={4}>
         <Stack textAlign={'justify'} spacing={2}>
           <Typography>

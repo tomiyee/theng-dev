@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { HeaderUnderline } from '../HeaderUnderline';
+import HeaderUnderline from '../HeaderUnderline';
 import './Experience.css';
-import { Box, styled } from '@mui/system';
+import { styled } from '@mui/system';
 
 import experiences from '../../assets/experienceData';
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 interface TabPanelProps<T> {
   children?: React.ReactNode | React.ReactNode[];
@@ -19,34 +19,32 @@ interface TabPanelProps<T> {
 const Experience: React.FC = ({ ...rest }) => {
   const [currentTab, setCurrentTab] = useState(0);
   return (
-    <section id="experience" className="experience-section" {...rest}>
-      <div className="experience-content">
-        <h1>Where I&apos;ve Been</h1>
-        <HeaderUnderline />
-        {/* The Experience Table */}
-        <div className="experience-viewer">
-          {/* The List of Tabs on the Left */}
-          <Tabs
-            value={currentTab}
-            onChange={(_, newTab) => setCurrentTab(newTab)}
-            orientation="vertical"
-            style={{ width: '100%' }}
-          >
-            <Tab className="experience-tab" label="MIT App Inventor" />
-            <Tab className="experience-tab" label="BBot Inc." />
-            <Tab className="experience-tab" label="Stanford ASL" />
-            <Tab className="experience-tab" label="Breakthrough SV" />
-          </Tabs>
+    <Stack component={'section'} id="experience" alignItems={'center'} className="experience-section" {...rest}>
+      <h1>Where I&apos;ve Been</h1>
+      <HeaderUnderline />
+      {/* The Experience Table */}
+      <div className="experience-viewer">
+        {/* The List of Tabs on the Left */}
+        <Tabs
+          value={currentTab}
+          onChange={(_, newTab) => setCurrentTab(newTab)}
+          orientation="vertical"
+          style={{ width: '100%' }}
+        >
+          <Tab className="experience-tab" label="MIT App Inventor" />
+          <Tab className="experience-tab" label="BBot Inc." />
+          <Tab className="experience-tab" label="Stanford ASL" />
+          <Tab className="experience-tab" label="Breakthrough SV" />
+        </Tabs>
 
-          {/* The Description of the Experience on the right */}
-          {experiences.map((experience, i) => (
-            <TabPanel value={currentTab} index={i} key={i}>
-              <ExperienceTab {...experience} />
-            </TabPanel>
-          ))}
-        </div>
+        {/* The Description of the Experience on the right */}
+        {experiences.map((experience, i) => (
+          <TabPanel value={currentTab} index={i} key={i}>
+            <ExperienceTab {...experience} />
+          </TabPanel>
+        ))}
       </div>
-    </section>
+    </Stack>
   );
 };
 
@@ -63,18 +61,22 @@ const ExperienceTab: React.FC<{
   desc: string[];
 }> = ({ position, location, time, desc, ...rest }) => {
   return (
-    <Box {...rest}>
-      <Typography variant='h5'>
-        <span className="color-navy">{position}</span>
+    <Stack alignItems={'flex-start'} spacing={1} {...rest}>
+
+      <Stack direction="row" alignItems='flex-end' spacing={1}>
+      <Typography variant='h5' color={'var(--navy)'}>{position}
       </Typography>
-        <span className="color-teal">{` @ ${location}`}</span>
+      <Typography color={'var(--teal)'}>
+      {` @ ${location}`}
+      </Typography>
+      </Stack>
       <p className="experience-range">{time}</p>
       <ExpDesc>
         {desc.map((line, i) => (
           <li key={`exp-line-${i}`}><Typography>{line}</Typography></li>
         ))}
       </ExpDesc>
-    </Box>
+    </Stack>
   );
 };
 
