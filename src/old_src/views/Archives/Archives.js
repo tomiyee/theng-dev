@@ -8,33 +8,37 @@ import LaunchIcon from '@mui/icons-material/Launch';
 const projects = require('../../assets/project-data.json');
 
 const linkIcons = new Map([
-  ['external', <LaunchIcon/>],
-  ['github',   <GitHubIcon/>],
-  ['youtube', <YouTubeIcon/>],
+  ['external', <LaunchIcon />],
+  ['github', <GitHubIcon />],
+  ['youtube', <YouTubeIcon />],
 ]);
 
 /**
- * 
+ *
  * @param {Object} props The Archive properties
  * @param {import("../../components/Projects/Projects.js").FeaturedProjectData} props.projectData - The data for the project this represents
  * @returns {JSX.Element}
  */
 const ArchiveItem = (props) => {
-  
-  const {title, desc, date, tech, links} = props.projectData;
-  
-  const projectTechListItems = tech
-    .map((item, i) => (
-      <li key={i} className={'project-tech-element'}>{item}</li>
-    ));
+  const { title, desc, date, tech, links } = props.projectData;
+
+  const projectTechListItems = tech.map((item, i) => (
+    <li key={i} className={'project-tech-element'}>
+      {item}
+    </li>
+  ));
 
   const displayedLinks = links
-    .filter(linkData => linkIcons.has(linkData[0]))
+    .filter((linkData) => linkIcons.has(linkData[0]))
     .map((linkData, i) => (
-      <a key={i} href={linkData[1]} style={{color: 'inherit'}} target="_blank" rel="noreferrer">
-        <div className='project-link'>
-          {linkIcons.get(linkData[0])}
-        </div>
+      <a
+        key={i}
+        href={linkData[1]}
+        style={{ color: 'inherit' }}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="project-link">{linkIcons.get(linkData[0])}</div>
       </a>
     ));
 
@@ -46,23 +50,17 @@ const ArchiveItem = (props) => {
       <div>{projectTechListItems}</div>
       <div>{displayedLinks}</div>
     </article>
-  )
-}
+  );
+};
 
 const Archives = (props) => {
-  
   const archiveItems = projects.map((projectData, i) => (
-    <ArchiveItem 
-      projectData={projectData}
-      key={i}
-    />
+    <ArchiveItem projectData={projectData} key={i} />
   ));
   return (
     <main>
       <h1>Archives</h1>
-      <div className="archive-list">
-        {archiveItems}
-      </div>
+      <div className="archive-list">{archiveItems}</div>
     </main>
   );
 };

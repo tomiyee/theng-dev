@@ -1,11 +1,8 @@
-
 /**
  * A Simple Vector
  */
- class Vector2D {
-
-
-  constructor (x, y) {
+class Vector2D {
+  constructor(x, y) {
     this.dimensions = 2;
     this.x = x;
     this.y = y;
@@ -19,9 +16,8 @@
    * @param {Boolean} [override] - false by default, if true, will override this vector's values
    * @ returns {Vector} Returns a new vector with the result of the addition, otherwise returns this
    */
-  add (other, override) {
-    if (!override) 
-      return new Vector2D(this.x + other.x, this.y + other.y);
+  add(other, override) {
+    if (!override) return new Vector2D(this.x + other.x, this.y + other.y);
     this.x += other.x;
     this.y += other.y;
     return this;
@@ -34,9 +30,8 @@
    * @param  {type} [override] - Default falseIf true, overr
    * @return {Vector} A new vector that is the result of subtraction.
    */
-  subtract (other, override) {
-    if (!override) 
-      return new Vector2D(this.x - other.x, this.y - other.y);
+  subtract(other, override) {
+    if (!override) return new Vector2D(this.x - other.x, this.y - other.y);
     this.x -= other.x;
     this.y -= other.y;
     return this;
@@ -48,7 +43,7 @@
    * @returns {number} distance between the two vectors
    */
   distanceTo(other) {
-    return Math.sqrt((this.x - other.x)**2 + (this.y - other.y)**2);
+    return Math.sqrt((this.x - other.x) ** 2 + (this.y - other.y) ** 2);
   }
 
   /**
@@ -56,7 +51,7 @@
    * @param {Vector} other - The other vector
    * @returns {Boolean} true if the vectors are the same, false otherwise
    */
-  equals (other){
+  equals(other) {
     return this.x === other.x && this.y === other.y;
   }
 
@@ -64,7 +59,7 @@
    * Returns an identical vecotr with all the properties
    * @returns {Vector2D} a copy of this vector
    */
-  copy () {
+  copy() {
     return new Vector2D(this.x, this.y);
   }
 
@@ -74,7 +69,7 @@
    * @param {number} maxY - The maximum value for the y component to take
    * @returns {Vector2D} This vector for chaining
    */
-  randomize (maxX, maxY) {
+  randomize(maxX, maxY) {
     this.x = Math.random() * maxX;
     this.y = Math.random() * maxY;
     return this;
@@ -92,8 +87,9 @@
     // finds the angles of the vectors relative to the horizontal
     // then subtracts these angles to get the angle of this vector
     // relative to the other vector
-    const relAngle = (this.y > 0 ? 1 : -1) * Math.acos(this.x/this.length()) -
-                     (other.y > 0 ? 1 : -1) * Math.acos(other.x/other.length());
+    const relAngle =
+      (this.y > 0 ? 1 : -1) * Math.acos(this.x / this.length()) -
+      (other.y > 0 ? 1 : -1) * Math.acos(other.x / other.length());
     return relAngle;
   }
 
@@ -104,7 +100,7 @@
    * @return {Number} the angle between the vectors in radians
    */
   getAngle(other) {
-    return Math.acos(this.dot(other)/(this.length()*other.length()))
+    return Math.acos(this.dot(other) / (this.length() * other.length()));
   }
 
   /**
@@ -112,7 +108,7 @@
    * @param {Number} factor - The magnitude to be scaled
    * @returns {Vector} This vector
    */
-  scale (factor) {
+  scale(factor) {
     this.x *= factor;
     this.y *= factor;
     return this;
@@ -120,43 +116,42 @@
 
   /**
    * Returns the Euclidean length of the vector
-   * 
+   *
    * @returns {number} The length of the vector
    */
-  length () {
-    return Math.sqrt( this.x**2 + this.y**2 );
+  length() {
+    return Math.sqrt(this.x ** 2 + this.y ** 2);
   }
 
-  setLength (l) {
-    const len = Math.sqrt( this.x**2 + this.y**2 );
+  setLength(l) {
+    const len = Math.sqrt(this.x ** 2 + this.y ** 2);
     this.x *= l / len;
     this.y *= l / len;
   }
 
-  setMax (l) {
-    const len = Math.sqrt( this.x**2 + this.y**2 );
+  setMax(l) {
+    const len = Math.sqrt(this.x ** 2 + this.y ** 2);
     if (len > l) {
       this.x *= l / len;
       this.y *= l / len;
     }
   }
 
-
   /**
    * Returns the dot product between this vector and the other
    * @param {Vector2D} other - the other vector to be dot product-ing(?)
    * @returns {number} The dot product of the two 2D vectors
    */
-  dot (other) {
-    return this.x*other.x+this.y*other.y;
+  dot(other) {
+    return this.x * other.x + this.y * other.y;
   }
 
   /**
    * @returns {String}  A representation of this vector
    */
-  toString () {
-    return `Vector2D <${this.x}, ${this.y}>`
+  toString() {
+    return `Vector2D <${this.x}, ${this.y}>`;
   }
 }
 
-export default Vector2D
+export default Vector2D;

@@ -8,27 +8,27 @@ import { Archives } from './views/Archives';
 import { Page404 } from './views/Page404';
 
 function App() {
-  const homePaths = ['/', '/home', '/theng-dev']
+  const homePaths = ['/', '/home', '/theng-dev'];
   return (
     <div className="App">
-        {/* Only show the Banner if we are on the home screen */}
-        <Routes>
-          {homePaths.map(p => 
-            <Route exact path={p} element={<Banner/>}/>
-          )}
-        </Routes>
-        {/* The navigation bar */}
-        <Navbar/>
-        {/* The content of the page, which may change depending on the path */}
-        <Routes>
-          {homePaths.map(p => 
-            <Route exact path={p} element={<Home/>}/>
-          )}
-          <Route exact path='archives' element={<Archives/>} />
-          <Route exact path='*' element={<Page404/>} />
-        </Routes>
+      {/* Only show the Banner if we are on the home screen */}
+      <Routes>
+        {homePaths.map((p) => (
+          <Route exact path={p} element={<Banner />} />
+        ))}
+      </Routes>
+      {/* The navigation bar */}
+      <Navbar />
+      {/* The content of the page, which may change depending on the path */}
+      <Routes>
+        {homePaths.map((p) => (
+          <Route exact path={p} element={<Home />} />
+        ))}
+        <Route exact path="archives" element={<Archives />} />
+        <Route exact path="*" element={<Page404 />} />
+      </Routes>
 
-        <Footer/>
+      <Footer />
     </div>
   );
 }
