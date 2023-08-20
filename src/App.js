@@ -25,6 +25,9 @@ function App() {
             <Route exact path={p} element={<Home/>}/>
           )}
           <Route exact path='archives' element={<Archives/>} />
+          <Route exact path='foundry' component={() => {
+            window.location.href = "http://129.158.244.128:30000/";
+          }}/>
           <Route exact path='*' element={<Page404/>} />
         </Routes>
 
