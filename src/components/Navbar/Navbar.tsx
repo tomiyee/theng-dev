@@ -5,7 +5,7 @@ import Pdf from '../../assets/tommy-heng-resume.pdf';
 /**
  * Creates a navbar
  */
-const Navbar = props => {
+const Navbar: React.FC = () => {
   return (
     <nav className='navbar'>
       <div className='navbar-content'>

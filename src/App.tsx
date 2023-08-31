@@ -6,15 +6,16 @@ import { Banner } from './components/Banner';
 import { Home } from './views/Home';
 import { Archives } from './views/Archives';
 import { Page404 } from './views/Page404';
+import { useEffect } from 'react';
 
-function App() {
+const App: React.FC = () =>  {
   const homePaths = ['/', '/home', '/theng-dev']
   return (
     <div className="App">
         {/* Only show the Banner if we are on the home screen */}
         <Routes>
           {homePaths.map(p => 
-            <Route exact path={p} element={<Banner/>}/>
+            <Route path={p} element={<Banner/>}/>
           )}
         </Routes>
         {/* The navigation bar */}
@@ -22,13 +23,11 @@ function App() {
         {/* The content of the page, which may change depending on the path */}
         <Routes>
           {homePaths.map(p => 
-            <Route exact path={p} element={<Home/>}/>
+            <Route path={p} element={<Home/>}/>
           )}
-          <Route exact path='archives' element={<Archives/>} />
-          <Route exact path='foundry' component={() => {
-            window.location.href = "http://129.158.244.128:30000/";
-          }}/>
-          <Route exact path='*' element={<Page404/>} />
+          <Route path='archives' element={<Archives/>} />
+          <Route path='foundry' element={<Foundry/>}/>
+          <Route path='*' element={<Page404/>} />
         </Routes>
 
         <Footer/>
@@ -37,3 +36,10 @@ function App() {
 }
 
 export default App;
+
+const Foundry : React.FC = () => {
+  useEffect(() => {
+    window.location.href = "http://129.158.244.128:30000/";
+  });
+  return null;
+}

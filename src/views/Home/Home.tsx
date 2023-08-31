@@ -4,7 +4,7 @@ import { Projects } from '../../components/Projects';
 import { HeaderUnderline } from '../../components/HeaderUnderline';
 import profile from '../../assets/profile.jpg';
 
-const Home = (props) => {
+const Home: React.FC = () => {
   return (
     <div>
       <main className='home-content'>
@@ -16,7 +16,7 @@ const Home = (props) => {
   );
 };
 
-const AboutMe = (props) => {
+const AboutMe: React.FC = () => {
   return (
     <section id='about' className='about-me-section flex col'>
       <h1>About Me</h1>
