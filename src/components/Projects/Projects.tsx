@@ -11,63 +11,36 @@ import githubIconSrc from '../../assets/github.svg';
 import { HeaderUnderline } from '../HeaderUnderline';
 
 import './Projects.css';
+import { FC } from 'react';
 
-/**
- * @typedef {Object} FeaturedProjectData
- * @property {boolean} featured - If true, shown on the vertical timeline
- * @property {string} title - The title of the card
- * @property {string} desc  - The brief project description
- * @property {string} date  - The time period of the project
- * @property {string} image - The image preview of the project
- * @property {string[]} tech - The list of tech involved
- * @property {string[][]} links - A list of [icon source, external link]
- */
+import projectData from '../../assets/project-data.json';
 
-/** @type {FeaturedProjectData[]} A list of information on all projects*/
-const featuredProjectsData = require('../../assets/project-data.json').filter(
+const featuredProjectsData = projectData.filter(
   (projectData) => projectData.featured,
 );
 
-/**
- *
- * @param {Object} props
- * @param {FeaturedProjectData} props.projectData
- * @returns {JSX.Element}
- */
-const ProjectCard = (props) => {
-  const { title, desc, date, tech, links } = props.projectData;
+const linkIcons = new Map([
+  ['external', <LaunchIcon />],
+  ['github', <img src={githubIconSrc} alt="git" />],
+  ['youtube', <YouTubeIcon />],
+]);
 
-  const linkIcons = new Map([
-    ['external', <LaunchIcon />],
-    ['github', <img src={githubIconSrc} alt="git" />],
-    ['youtube', <YouTubeIcon />],
-  ]);
+type FeaturedProjectData = (typeof featuredProjectsData)[0];
 
-  /** @type {Object} The style on the timeline icon element */
-  const iconStyle = {
-    background: 'var(--white)',
-    boxShadow:
-      '0 0 0 4px var(--teal), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)',
-  };
-
-  /** @type {Object} The style on the timeline card element */
-  const timelineElemStyle = {
-    textAlign: 'left',
-    borderTop: '4px solid var(--teal)',
-  };
-
-  /** @type {JSX.Element[]} Converts the list of project tech into an itemised list*/
-  const projectTechListItems = tech.map((item, i) => (
-    <li key={i} className={'project-tech-element'}>
-      {item}
-    </li>
-  ));
+interface ProjectCardProps {
+  projectData: FeaturedProjectData;
+}
+const ProjectCard: FC<ProjectCardProps> = ({ projectData }) => {
+  const { title, desc, date, tech, links } = projectData;
 
   return (
     <VerticalTimelineElement
       className="vertical-timeline-element--work"
       date={date}
-      contentStyle={timelineElemStyle}
+      contentStyle={{
+        textAlign: 'left',
+        borderTop: '4px solid var(--teal)',
+      }}
       iconStyle={iconStyle}
       icon={<FolderOutlinedIcon />}
     >
@@ -106,30 +79,26 @@ const ProjectCard = (props) => {
 
         {/* The list of different technology */}
         <div className="project-card-bottom">
-          <ul className="project-card-tech-list">{projectTechListItems}</ul>
+          <ul className="project-card-tech-list">
+            {tech.map((item, i) => (
+              <li key={i} className={'project-tech-element'}>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </article>
     </VerticalTimelineElement>
   );
 };
 
-const Projects = (props) => {
-  const starElement = (
-    <VerticalTimelineElement
-      icon={<StarIcon style={{ fill: 'var(--navy)' }} />}
-      iconStyle={{
-        background: 'var(--teal)',
-        boxShadow:
-          '0 0 0 4px var(--navy), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)',
-      }}
-    />
-  );
+const iconStyle = {
+  background: 'var(--white)',
+  boxShadow:
+    '0 0 0 4px var(--teal), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)',
+};
 
-  /** @type {VerticalTimelineElement[]} */
-  const featuredProjects = featuredProjectsData.map((data, i) => {
-    return <ProjectCard key={i} projectData={data} />;
-  });
-
+const Projects: FC = () => {
   return (
     <section id="projects">
       <br />
@@ -137,8 +106,19 @@ const Projects = (props) => {
       <HeaderUnderline />
       <div className="projects-content">
         <VerticalTimeline lineColor={'var(--navy)'}>
-          {featuredProjects}
-          {starElement}
+          {featuredProjectsData.map((data, i) => (
+            <ProjectCard key={i} projectData={data} />
+          ))}
+          {
+            <VerticalTimelineElement
+              icon={<StarIcon style={{ fill: 'var(--navy)' }} />}
+              iconStyle={{
+                background: 'var(--teal)',
+                boxShadow:
+                  '0 0 0 4px var(--navy), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)',
+              }}
+            />
+          }
         </VerticalTimeline>
       </div>
     </section>

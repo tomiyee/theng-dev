@@ -4,8 +4,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-/** @type {import("../../components/Projects/Projects.js").FeaturedProjectData[]} */
-const projects = require('../../assets/project-data.json');
+import projects from '../../assets/project-data.json';
+
+type ProjectData = (typeof projects)[0];
 
 const linkIcons = new Map([
   ['external', <LaunchIcon />],
@@ -13,14 +14,12 @@ const linkIcons = new Map([
   ['youtube', <YouTubeIcon />],
 ]);
 
-/**
- *
- * @param {Object} props The Archive properties
- * @param {import("../../components/Projects/Projects.js").FeaturedProjectData} props.projectData - The data for the project this represents
- * @returns {JSX.Element}
- */
-const ArchiveItem = (props) => {
-  const { title, desc, date, tech, links } = props.projectData;
+interface ArchiveItemProps {
+  projectData: ProjectData;
+}
+
+const ArchiveItem: React.FC<ArchiveItemProps> = ({ projectData }) => {
+  const { title, desc, date, tech, links } = projectData;
 
   const projectTechListItems = tech.map((item, i) => (
     <li key={i} className={'project-tech-element'}>
@@ -53,14 +52,15 @@ const ArchiveItem = (props) => {
   );
 };
 
-const Archives = (props) => {
-  const archiveItems = projects.map((projectData, i) => (
-    <ArchiveItem projectData={projectData} key={i} />
-  ));
+const Archives = () => {
   return (
     <main>
       <h1>Archives</h1>
-      <div className="archive-list">{archiveItems}</div>
+      <div className="archive-list">
+        {projects.map((projectData, i) => (
+          <ArchiveItem projectData={projectData} key={i} />
+        ))}
+      </div>
     </main>
   );
 };

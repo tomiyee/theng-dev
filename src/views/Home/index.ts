@@ -1,1 +1,3 @@
-export { default as Home } from './Home.js';
+import Home from './Home';
+
+export default Home;

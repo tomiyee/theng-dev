@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Vector2D from './Vector2D.js';
 import './Banner.css';
 
@@ -23,22 +23,6 @@ let mouseX = 0,
  * Banner is the banner on the home page of my portfolio. It has the flocking simulator.
  */
 function Banner() {
-  const canvasJsx = (
-    <canvas
-      className="banner-bg-canvas"
-      width="100%"
-      height="100%"
-      onMouseEnter={() => (mouseOnCanvas = true)}
-      onMouseLeave={() => (mouseOnCanvas = false)}
-      onMouseMove={(e) => {
-        if (!canvas) return;
-        const rect = canvas.getBoundingClientRect();
-        mouseX = e.clientX - rect.left;
-        mouseY = e.clientY - rect.top;
-      }}
-    />
-  );
-
   const NUM_BOIDS =
     ((window.innerWidth * window.innerHeight) / (100 * 100)) * 2;
   for (let i = 0; i < NUM_BOIDS; i++) {
@@ -48,16 +32,31 @@ function Banner() {
     boids.push(boid);
   }
 
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
     /* Called upon mount */
-    canvas = document.getElementsByClassName('banner-bg-canvas')[0];
-    ctx = canvas.getContext('2d');
+    if (canvasRef.current === null) return;
+    ctx = canvasRef.current.getContext('2d') as CanvasRenderingContext2D;
     window.requestAnimationFrame(update);
   }, []);
 
   return (
     <section className="banner" id="banner">
-      {canvasJsx}
+      <canvas
+        ref={canvasRef}
+        className="banner-bg-canvas"
+        width="100%"
+        height="100%"
+        onMouseEnter={() => (mouseOnCanvas = true)}
+        onMouseLeave={() => (mouseOnCanvas = false)}
+        onMouseMove={(e) => {
+          if (!canvas) return;
+          const rect = canvas.getBoundingClientRect();
+          mouseX = e.clientX - rect.left;
+          mouseY = e.clientY - rect.top;
+        }}
+      />
       <div className="banner-text">
         Hello, I'm <span className="highlight">Tommy Heng</span>.
       </div>
@@ -100,10 +99,10 @@ class Boid {
   velocity: Vector2D;
   acceleration: Vector2D;
 
-  constructor(x, y) {
+  constructor(x?: number, y?: number) {
     this.position = new Vector2D(
-      !isNaN(x) ? x : Math.random() * WIDTH,
-      !isNaN(y) ? y : Math.random() * HEIGHT,
+      x ?? Math.random() * WIDTH,
+      y ?? Math.random() * HEIGHT,
     );
     const angle = Math.random() * 2 * Math.PI;
     this.velocity = new Vector2D(Math.cos(angle), Math.sin(angle));
@@ -168,14 +167,13 @@ class Boid {
    * repulsion - Third force, wehre the boid will attempt to get further from the
    * "center of gravity" of its local flock to prevent "collisions" or overlap
    *
-   * @param  {Vector2D} local A list of boids local to this one
-   * @return {Vector2D}       A vector repr this force's influence
+   * @return  A vector of the repulsion force's influence
    */
-  repulsion(local) {
-    let force = new Vector2D(0, 0);
-    for (let i = 0; i < local.length; i++) {
-      force.x += 1 / (this.position.x - local[i].position.x);
-      force.y += 1 / (this.position.y - local[i].position.y);
+  repulsion(flock: Boid[]) {
+    const force = new Vector2D(0, 0);
+    for (let i = 0; i < flock.length; i++) {
+      force.x += 1 / (this.position.x - flock[i].position.x);
+      force.y += 1 / (this.position.y - flock[i].position.y);
     }
     if (
       mouseOnCanvas &&
@@ -224,7 +222,7 @@ class Boid {
     ctx.fill();
   }
 
-  update(boids) {
+  update(boids: Boid[]) {
     const local = this.localFlock(boids);
     if (local.length > 0) {
       // Clears any existing acceleration
