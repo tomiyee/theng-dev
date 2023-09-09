@@ -7,8 +7,7 @@ const BG_COLOR = '#2B2D42';
 /**
  * Banner is the banner on the home page of my portfolio. It has the flocking simulator.
  */
-const Banner : React.FC = () => {
-
+const Banner: React.FC = () => {
   const mousePos = useRef<Vector2D>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -19,13 +18,17 @@ const Banner : React.FC = () => {
   const numBoids = width * height * averageDensity;
   const totalBoids = [];
   for (let i = 0; i < numBoids; i++) {
-    totalBoids.push(new Boid(Math.random()*window.innerWidth, Math.random()*window.innerHeight, canvasRef));
+    totalBoids.push(
+      new Boid(
+        Math.random() * window.innerWidth,
+        Math.random() * window.innerHeight,
+        canvasRef,
+      ),
+    );
   }
   const [boids, setBoids] = useState<Boid[]>(totalBoids);
 
-
   useEffect(() => {
-    /* Called upon mount */
     if (canvasRef.current === null) return undefined;
     const canvas = canvasRef.current;
     const ctx = canvasRef.current.getContext('2d') as CanvasRenderingContext2D;
@@ -36,28 +39,27 @@ const Banner : React.FC = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       ctx.fillStyle = BG_COLOR;
-      ctx.fillRect(0,0,canvas.width, canvas.height)
-      boids.forEach(boid => {
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      boids.forEach((boid) => {
         boid.update(boids, mousePos);
         boid.draw(canvas, ctx, mousePos);
       });
-      const flock = boids[0].localFlock(boids);
-      flock.forEach((boid) => boid.draw(canvas, ctx, mousePos, ("255, 0, 0")))
-      boids[0].draw(canvas, ctx, mousePos, ("255, 255, 0"))
-      if (stopAnimation) return; 
+      if (stopAnimation) return;
       window.requestAnimationFrame(update);
     };
     window.requestAnimationFrame(update);
-    return () => {stopAnimation = true};
+    return () => {
+      stopAnimation = true;
+    };
   }, []);
 
   const updateMousePos: React.MouseEventHandler = useCallback((e) => {
-    if (mousePos.current === undefined) mousePos.current = new Vector2D(0,0);
+    if (mousePos.current === undefined) mousePos.current = new Vector2D(0, 0);
     const rect = canvasRef.current?.getBoundingClientRect();
     if (rect === undefined) return;
     mousePos.current.x = e.clientX - rect.left;
     mousePos.current.y = e.clientY - rect.top;
-  }, [])
+  }, []);
 
   return (
     <section className="banner" id="banner">
@@ -75,5 +77,5 @@ const Banner : React.FC = () => {
       </div>
     </section>
   );
-}
+};
 export default Banner;

@@ -15,7 +15,7 @@ const App: React.FC = () => {
       {/* Only show the Banner if we are on the home screen */}
       <Routes>
         {homePaths.map((p) => (
-          <Route path={p} element={<Banner />} key={p}/>
+          <Route path={p} element={<Banner />} key={p} />
         ))}
       </Routes>
       {/* The navigation bar */}
@@ -23,7 +23,7 @@ const App: React.FC = () => {
       {/* The content of the page, which may change depending on the path */}
       <Routes>
         {homePaths.map((p) => (
-          <Route path={p} element={<Home />} key={p}/>
+          <Route path={p} element={<Home />} key={p} />
         ))}
         <Route path="archives" element={<Archives />} />
         <Route path="foundry" element={<Foundry />} />
