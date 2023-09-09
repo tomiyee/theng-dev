@@ -6,13 +6,11 @@ import profile from '../../assets/profile.jpg';
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <main className="home-content">
-        <AboutMe />
-        <Experience />
-        <Projects />
-      </main>
-    </div>
+    <main className="home-content">
+      <AboutMe />
+      <Experience />
+      <Projects />
+    </main>
   );
 };
 

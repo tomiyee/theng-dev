@@ -94,6 +94,7 @@ class Vector2D {
       this.x *= maxLength / len;
       this.y *= maxLength / len;
     }
+    return this;
   }
 
   /** Returns the dot product between this vector and the other */
