@@ -1,13 +1,17 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "npm",
-			"script": "build",
-			"group": "build",
-			"problemMatcher": [],
-			"label": "npm: start",
-			"detail": "react-scripts start"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "group": "build",
+      "label": "ESLint Check (custom)",
+      "command": "npm run lint-fix"
+    },
+    {
+      "type": "shell",
+      "group": "build",
+      "label": "Style Check (custom)",
+      "command": "npm run style"
+    }
+  ]
 }

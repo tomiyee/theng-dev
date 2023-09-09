@@ -9,7 +9,7 @@
   --navy-darker: hsl(235, 21%, 12%);
 
   --teal-lighter: hsl(165, 74%, 63%);
-  --teal: #41E2BA;
+  --teal: #41e2ba;
   --teal-darker: hsl(165, 74%, 52%);
   --teal-darker: hsl(165, 74%, 42%);
 
@@ -18,8 +18,8 @@
   --gray: hsl(0, 0%, 50%);
   --gray-darker: hsl(0, 0%, 35%);
   --gray-darkest: hsl(0, 0%, 20%);
-  --yellow: #F7E733;
-  --orange: #EE6C4D;
+  --yellow: #f7e733;
+  --orange: #ee6c4d;
   --max-content-width: 900px;
 }
 
@@ -49,7 +49,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: "Raleway";
+  font-family: 'Raleway';
   /* color: var(--white); */
   background-color: var(--white);
 }
