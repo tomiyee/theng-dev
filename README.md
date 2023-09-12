@@ -2,7 +2,7 @@
 
 ## Development
 
-Create a new branch. Make changes. Squash and Merge. 
+Create a new branch. Make changes. Squash and Merge.
 
 ## Deployment
 
