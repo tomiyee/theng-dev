@@ -4,10 +4,7 @@ import {
 } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
-import LaunchIcon from '@mui/icons-material/Launch';
 import StarIcon from '@mui/icons-material/Star';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import githubIconSrc from '../../assets/github.svg';
 import { HeaderUnderline } from '../HeaderUnderline';
 
 import './Projects.css';
@@ -18,12 +15,6 @@ import projectData from '../../assets/project-data.json';
 const featuredProjectsData = projectData.filter(
   (projectData) => projectData.featured,
 );
-
-const linkIcons = new Map([
-  ['external', <LaunchIcon />],
-  ['github', <img src={githubIconSrc} alt="git" />],
-  ['youtube', <YouTubeIcon />],
-]);
 
 type FeaturedProjectData = (typeof featuredProjectsData)[0];
 

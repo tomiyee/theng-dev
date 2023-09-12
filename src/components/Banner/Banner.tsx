@@ -26,7 +26,7 @@ const Banner: React.FC = () => {
       ),
     );
   }
-  const [boids, setBoids] = useState<Boid[]>(totalBoids);
+  const [boids, ] = useState<Boid[]>(totalBoids);
 
   useEffect(() => {
     if (canvasRef.current === null) return undefined;
@@ -51,7 +51,7 @@ const Banner: React.FC = () => {
     return () => {
       stopAnimation = true;
     };
-  }, []);
+  }, [boids]);
 
   const updateMousePos: React.MouseEventHandler = useCallback((e) => {
     if (mousePos.current === undefined) mousePos.current = new Vector2D(0, 0);
@@ -73,7 +73,7 @@ const Banner: React.FC = () => {
         onMouseMove={updateMousePos}
       />
       <div className="banner-text">
-        Hello, I'm <span className="highlight">Tommy Heng</span>.
+        Hello, I&apos;m <span className="highlight">Tommy Heng</span>.
       </div>
     </section>
   );

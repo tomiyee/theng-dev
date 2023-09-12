@@ -37,7 +37,7 @@ const AboutMe: React.FC = () => {
         <div className="profile-pic-section">
           <div className="about-me-profile-container">
             <img src={profile} className="profile-pic" alt="it be me" />
-            <div className="about-me-profile-inner"></div>
+            <div className="about-me-profile-inner" />
           </div>
         </div>
       </div>
