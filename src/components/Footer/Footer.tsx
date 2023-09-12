@@ -24,7 +24,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({ icon, link, ...other }) => {
   );
 };
 
-const Footer : FC = ({ ...other }) => {
+const Footer: FC = ({ ...other }) => {
   return (
     <footer {...other}>
       <div className="icons">

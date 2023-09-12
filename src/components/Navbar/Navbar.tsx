@@ -24,7 +24,6 @@ const Navbar: React.FC = () => {
             <div className="navbar-link">PORTFOLIO</div>
           </a>
         </div>
-        {/* Resume Button in the top right */}
         <a
           href={Pdf}
           target="_blank"

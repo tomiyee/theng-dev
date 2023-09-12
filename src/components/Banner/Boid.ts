@@ -103,7 +103,6 @@ class Boid {
     mousePosRef: React.MutableRefObject<Vector2D | undefined>,
     color?: string,
   ) {
-    const { width, height } = canvas;
     const angle = Math.atan2(this.vel.y, this.vel.x);
     const backAngle = Math.PI / 5;
     ctx.fillStyle = `rgba(${color ?? BOID_COLOR},${MIN_ALPHA})`;
