@@ -26,7 +26,7 @@ const Banner: React.FC = () => {
       ),
     );
   }
-  const [boids, ] = useState<Boid[]>(totalBoids);
+  const [boids] = useState<Boid[]>(totalBoids);
 
   useEffect(() => {
     if (canvasRef.current === null) return undefined;

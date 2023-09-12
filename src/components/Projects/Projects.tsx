@@ -11,19 +11,18 @@ import './Projects.css';
 import { FC } from 'react';
 
 import projectData from '../../assets/project-data.json';
+import { LinkType, linkToIcon } from '../../utils/links';
 
-const featuredProjectsData = projectData.filter(
-  (projectData) => projectData.featured,
-);
+const featuredProjectsData = projectData.filter(({ featured }) => featured);
 
 type FeaturedProjectData = (typeof featuredProjectsData)[0];
 
 interface ProjectCardProps {
   projectData: FeaturedProjectData;
 }
-const ProjectCard: FC<ProjectCardProps> = ({ projectData }) => {
-  const { title, desc, date, tech, links } = projectData;
-
+const ProjectCard: FC<ProjectCardProps> = ({
+  projectData: { title, desc, date, tech, links },
+}) => {
   return (
     <VerticalTimelineElement
       className="vertical-timeline-element--work"
@@ -52,7 +51,9 @@ const ProjectCard: FC<ProjectCardProps> = ({ projectData }) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div className="project-link">{linkIcons.get(linkData[0])}</div>
+                <div className="project-link">
+                  {linkToIcon[linkData[0] as LinkType]}
+                </div>
               </a>
             ))}
           </div>

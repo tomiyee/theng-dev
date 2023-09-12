@@ -9,16 +9,16 @@ import React from 'react';
 type ProjectData = (typeof projects)[0];
 
 enum LinkType {
-  EXTERNAL = 'external', 
+  EXTERNAL = 'external',
   GITHUB = 'github',
-  YOUTUBE = 'youtube' 
+  YOUTUBE = 'youtube',
 }
 
 const linkToIcon: Record<LinkType, React.ReactNode> = {
-  [LinkType.EXTERNAL]: <LaunchIcon/>,
-  [LinkType.GITHUB]: <GitHubIcon/>,
-  [LinkType.YOUTUBE]: <YouTubeIcon/>,
-}
+  [LinkType.EXTERNAL]: <LaunchIcon />,
+  [LinkType.GITHUB]: <GitHubIcon />,
+  [LinkType.YOUTUBE]: <YouTubeIcon />,
+};
 
 interface ArchiveItemProps {
   projectData: ProjectData;
@@ -32,23 +32,28 @@ const ArchiveItem: React.FC<ArchiveItemProps> = ({ projectData }) => {
       <h2>{title}</h2>
       <span>{date}</span>
       <p>{desc}</p>
-      <div>{tech.map((item, i) => (
-    <li key={i} className={'project-tech-element'}>
-      {item}
-    </li>
-  ))}</div>
-      <div>{links
-    .map(([linkType, linkUrl], i) => (
-      <a
-        key={i}
-        href={linkUrl}
-        style={{ color: 'inherit' }}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <div className="project-link">{linkToIcon[linkType as LinkType]}</div>
-      </a>
-    ))}</div>
+      <div>
+        {tech.map((item, i) => (
+          <li key={i} className={'project-tech-element'}>
+            {item}
+          </li>
+        ))}
+      </div>
+      <div>
+        {links.map(([linkType, linkUrl], i) => (
+          <a
+            key={i}
+            href={linkUrl}
+            style={{ color: 'inherit' }}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="project-link">
+              {linkToIcon[linkType as LinkType]}
+            </div>
+          </a>
+        ))}
+      </div>
     </article>
   );
 };
