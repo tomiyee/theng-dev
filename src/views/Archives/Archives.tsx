@@ -16,17 +16,24 @@ import DynamicGrid from '../../components/DynamicGrid';
 
 type ProjectData = (typeof projects)[0];
 
-const linkIcons = new Map([
-  ['external', <LaunchIcon />],
-  ['github', <GitHubIcon />],
-  ['youtube', <YouTubeIcon />],
-]);
+enum LinkType {
+  EXTERNAL = 'external',
+  GITHUB = 'github',
+  YOUTUBE = 'youtube',
+}
+
+const linkToIcon: Record<LinkType, React.ReactNode> = {
+  [LinkType.EXTERNAL]: <LaunchIcon />,
+  [LinkType.GITHUB]: <GitHubIcon />,
+  [LinkType.YOUTUBE]: <YouTubeIcon />,
+};
 
 interface ArchiveItemProps {
   projectData: ProjectData;
 }
 
 const ArchiveItem: React.FC<ArchiveItemProps> = ({ projectData }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { title, desc, date, tech, links } = projectData;
 
   return (
@@ -37,9 +44,9 @@ const ArchiveItem: React.FC<ArchiveItemProps> = ({ projectData }) => {
       </CardContent>
       <CardActions disableSpacing>
         {links.map((linkData, i) => (
-          <Link href={linkData[1]}>
-            <IconButton key={`${title}-link-${i}`}>
-              {linkIcons.get(linkData[0])}
+          <Link href={linkData[1]} key={`${title}-link-${i}`}>
+            <IconButton >
+              {linkToIcon[linkData[0] as LinkType]}
             </IconButton>
           </Link>
         ))}

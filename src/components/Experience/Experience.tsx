@@ -46,7 +46,7 @@ const Experience: React.FC = () => {
   return (
     <section id="experience" className="experience-section">
       <div className="experience-content">
-        <h1>Where I've Been</h1>
+        <h1>Where I&apos;ve Been</h1>
         <HeaderUnderline />
         {/* The Experience Table */}
         <div className="experience-viewer">
