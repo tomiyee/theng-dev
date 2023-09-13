@@ -49,10 +49,6 @@ const ArchiveItem: React.FC<ArchiveItemProps> = ({ projectData }) => {
           </Link>
         ))}
       </CardActions>
-
-
-
-      
     </Card>
   );
 };
