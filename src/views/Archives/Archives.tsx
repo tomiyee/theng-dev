@@ -45,12 +45,14 @@ const ArchiveItem: React.FC<ArchiveItemProps> = ({ projectData }) => {
       <CardActions disableSpacing>
         {links.map((linkData, i) => (
           <Link href={linkData[1]} key={`${title}-link-${i}`}>
-            <IconButton >
-              {linkToIcon[linkData[0] as LinkType]}
-            </IconButton>
+            <IconButton>{linkToIcon[linkData[0] as LinkType]}</IconButton>
           </Link>
         ))}
       </CardActions>
+
+
+
+      
     </Card>
   );
 };

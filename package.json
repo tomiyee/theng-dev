@@ -31,8 +31,8 @@
     "deploy": "cd build && cp index.html 404.html && cd .. && gh-pages -d build"
   },
   "pre-commit": [
-    "lint-fix",
-    "style"
+    "lint",
+    "style-check"
   ],
   "eslintConfig": {
     "extends": [
