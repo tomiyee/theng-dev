@@ -2,9 +2,9 @@ import { PropsWithChildren, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import { HeaderUnderline } from '../HeaderUnderline';
 import './Experience.css';
+import { Box } from '@mui/material';
 
 interface TabPanelProps {
   /** The value of this panel */
@@ -28,9 +28,7 @@ const TabPanel: React.FC<PropsWithChildren<TabPanelProps>> = ({
       className="tabpanel"
       {...other}
     >
-      {value === index && (
-        <Typography style={{ textAlign: 'left' }}>{children}</Typography>
-      )}
+      {value === index && <Box textAlign="left">{children}</Box>}
     </div>
   );
 };

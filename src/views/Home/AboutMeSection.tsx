@@ -51,17 +51,17 @@ const PortraitContainer = styled('div')({
   zIndex: '0',
 });
 
-const PortraitRing = styled('div')({
+const PortraitRing = styled('div')(({ theme }) => ({
   width: '100%',
   height: '100%',
   position: 'absolute',
-  border: '4px solid var(--teal)',
+  border: `4px solid ${theme.palette.secondary.main}`,
   borderRadius: '5px',
   top: '20px',
   left: '20px',
   zIndex: '-1',
   boxSizing: 'border-box',
-});
+}));
 
 const PortraitImage = styled('img')({
   zIndex: '0',
