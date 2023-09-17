@@ -1,7 +1,7 @@
 import './Footer.css';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { Tooltip } from '@mui/material';
+import { Tooltip, styled } from '@mui/material';
 import { FC } from 'react';
 
 interface SocialIconProps {
@@ -24,9 +24,9 @@ const SocialIcon: React.FC<SocialIconProps> = ({ icon, link, ...other }) => {
   );
 };
 
-const Footer: FC = ({ ...other }) => {
+const Footer: FC = () => {
   return (
-    <footer {...other}>
+    <StyledFooter>
       <div className="icons">
         <SocialIcon
           icon={<LinkedInIcon className={'footer-icon'} />}
@@ -42,8 +42,19 @@ const Footer: FC = ({ ...other }) => {
           TOMMY HENG <span style={{ color: 'var(--orange)' }}>©2023</span>
         </div>
       </Tooltip>
-    </footer>
+    </StyledFooter>
   );
 };
 
 export default Footer;
+
+const StyledFooter = styled('footer')(({ theme }) => ({
+  background: theme.palette.primary.main,
+  color: theme.palette.grey[50],
+  height: '100px',
+  width: '100%',
+  left: 0,
+  right: 0,
+  position: 'absolute',
+  bottom: 0,
+}));

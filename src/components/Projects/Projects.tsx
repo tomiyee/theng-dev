@@ -5,13 +5,13 @@ import {
 import 'react-vertical-timeline-component/style.min.css';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import StarIcon from '@mui/icons-material/Star';
-import { HeaderUnderline } from '../HeaderUnderline';
 
 import './Projects.css';
 import { FC } from 'react';
 
 import projectData from '../../assets/project-data.json';
 import { LinkType, linkToIcon } from '../../utils/links';
+import HomePageSection from '../../views/Home/HomePageSection';
 
 const featuredProjectsData = projectData.filter(({ featured }) => featured);
 
@@ -92,28 +92,23 @@ const iconStyle = {
 
 const Projects: FC = () => {
   return (
-    <section id="projects">
-      <br />
-      <h1>Previous Projects</h1>
-      <HeaderUnderline />
+    <HomePageSection title="Previous Projects">
       <div className="projects-content">
         <VerticalTimeline lineColor={'var(--navy)'}>
           {featuredProjectsData.map((data, i) => (
             <ProjectCard key={i} projectData={data} />
           ))}
-          {
-            <VerticalTimelineElement
-              icon={<StarIcon style={{ fill: 'var(--navy)' }} />}
-              iconStyle={{
-                background: 'var(--teal)',
-                boxShadow:
-                  '0 0 0 4px var(--navy), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)',
-              }}
-            />
-          }
+          <VerticalTimelineElement
+            icon={<StarIcon style={{ fill: 'var(--navy)' }} />}
+            iconStyle={{
+              background: 'var(--teal)',
+              boxShadow:
+                '0 0 0 4px var(--navy), inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)',
+            }}
+          />
         </VerticalTimeline>
       </div>
-    </section>
+    </HomePageSection>
   );
 };
 

@@ -1,13 +1,13 @@
-footer {
-  background: var(--navy);
-  color: var(--white-darker);
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 70px 0 50px 0;
-  gap: 20px;
-}
+/* footer { */
+/* background: var(--navy); */
+/* color: var(--white-darker); */
+/* height: 100px; */
+/* display: flex; */
+/* flex-direction: column; */
+/* align-items: center; */
+/* padding: 70px 0 50px 0; */
+/* gap: 20px; */
+/* } */
 
 .footnote {
   color: rgba(247, 247, 249, 0.35);

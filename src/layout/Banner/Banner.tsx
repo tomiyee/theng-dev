@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Vector2D from './Vector2D.js';
 import './Banner.css';
-import Boid from './Boid';
+import Boid from './Boid.js';
 
 const BG_COLOR = '#2B2D42';
 /**

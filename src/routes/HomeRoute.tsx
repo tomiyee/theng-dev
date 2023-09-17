@@ -1,4 +1,4 @@
-import { Banner } from '../components/Banner';
+import { Banner } from '../layout/Banner';
 import MainLayout from '../layout';
 import Home from '../views/Home';
 

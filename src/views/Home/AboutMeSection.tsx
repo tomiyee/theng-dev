@@ -1,33 +1,45 @@
-import { Box, Stack, Typography, styled } from '@mui/material';
+import { Box, Chip, Grid, Typography, styled } from '@mui/material';
 import profile from '../../assets/profile.jpg';
 import { FC } from 'react';
+import HomePageSection from './HomePageSection';
 
 const AboutMeSection: FC = () => {
   return (
-    <Stack component="section" alignItems="center" maxWidth="lg" p={6}>
-      <Typography variant="h2">About Me</Typography>
-      <Stack
-        alignItems="center"
-        direction={{ xs: 'column-reverse', md: 'row' }}
-        spacing={2}
-      >
-        <Box>
-          <Typography variant="body1">
-            Hello! My name is Tommy Heng and I enjoy designing software with a
-            positive community impact. My interest in web development started in
-            2011, where I made a Khan Academy knock-off tailored for my middle
-            school.
+    <HomePageSection title="About Me">
+      <Grid container>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h3" pb={2}>
+            Get to know me!
           </Typography>
           <Typography variant="body1">
-            Most recently, my projects have ranged from full-stack development
-            on a visual programming platform, to designing web applications for
-            start-ups, to even leading workshops on Conversational AI for local
-            high school students.
+            I am a <strong>UX Designer</strong> and{' '}
+            <strong>Full-Stack Engineer</strong> with a backgrond in crafting
+            user-centric digital experiences and a passion for accessible
+            design. My mission is to make technology accessible, and I thrive on
+            the challenge of blending cutting-edge technology with intuitive
+            design.
           </Typography>
-        </Box>
-        <Portrait />
-      </Stack>
-    </Stack>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box m="auto">
+            <Portrait />
+          </Box>
+          <Typography variant="h3" pb={2}>
+            My Skills
+          </Typography>
+
+          <Box display="flex" flexWrap="wrap" gap={1}>
+            <StyledChip label="HTML" />
+            <StyledChip label="CSS" />
+            <StyledChip label="Javascript" />
+            <StyledChip label="React.js" />
+            <StyledChip label="GitHub" />
+            <StyledChip label="Terminal" />
+            <StyledChip label="Python" />
+          </Box>
+        </Grid>
+      </Grid>
+    </HomePageSection>
   );
 };
 export default AboutMeSection;
@@ -46,6 +58,8 @@ const Portrait: FC = () => {
 const PortraitContainer = styled('div')({
   height: '250px',
   width: '250px',
+  marginBottom: '20px',
+  marginRight: '20px',
   position: 'relative',
   boxSizing: 'border-box',
   zIndex: '0',
@@ -67,4 +81,10 @@ const PortraitImage = styled('img')({
   zIndex: '0',
   borderRadius: '5px',
   width: '100%',
+});
+
+const StyledChip = styled(Chip)({
+  borderRadius: '4px',
+  padding: '0.7rem',
+  height: 'unset',
 });
