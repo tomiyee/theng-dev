@@ -7,9 +7,9 @@ const ALIGNMENT_FACTOR = 0.2;
 const COHESION_FACTOR = 0.04;
 const REPULSION_FACTOR = 1.8;
 const BOID_COLOR = '247,247,249';
-const MIN_ALPHA = 0.35;
+const MIN_ALPHA = 0.14;
 const BOID_RADIUS = 6;
-const BOID_SPEED = 3;
+const BOID_SPEED = 2;
 
 function scale(
   number: number,

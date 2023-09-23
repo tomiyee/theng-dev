@@ -1,18 +1,34 @@
-import { Box, Stack, StackProps, Typography, styled } from '@mui/material';
+import {
+  Box,
+  BoxProps,
+  Stack,
+  StackProps,
+  Typography,
+  styled,
+} from '@mui/material';
 import { PropsWithChildren } from 'react';
 
 interface HomePageSectionProps {
   title: string;
+  subtitle?: string;
   stackProps?: StackProps;
+  id?: string;
+  componentProps?: BoxProps;
+  /** Renders with light font */
+  light?: boolean;
 }
 
 const HomePageSection: React.FC<PropsWithChildren<HomePageSectionProps>> = ({
   children,
   title,
+  subtitle,
+  id,
+  light,
   stackProps,
+  componentProps,
 }) => {
   return (
-    <Box width="100%">
+    <Box width="100%" id={id} pt={4} {...componentProps}>
       <Stack
         component="section"
         alignItems="center"
@@ -21,8 +37,16 @@ const HomePageSection: React.FC<PropsWithChildren<HomePageSectionProps>> = ({
         m="auto"
         {...stackProps}
       >
-        <Typography variant="h2" textTransform={'uppercase'} mb="3.5rem">
+        <Typography
+          variant="h2"
+          textTransform={'uppercase'}
+          mb="3.5rem"
+          color={light ? 'white' : undefined}
+        >
           <StyledSectionHeader>{title}</StyledSectionHeader>
+        </Typography>
+        <Typography variant="body2" pb="2rem">
+          {subtitle}
         </Typography>
         {children}
       </Stack>

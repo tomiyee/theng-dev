@@ -14,14 +14,13 @@ const themeOptions: ThemeOptions = {
     },
   },
   typography: {
-    // fontFamily: '"Raleway",sans-serif',
-    fontFamily: 'sans-serif',
+    fontFamily: '"Raleway",sans-serif',
     fontWeightRegular: 500,
     fontWeightMedium: 600,
     fontWeightLight: 400,
     fontSize: 16,
     h1: {
-      fontSize: '3rem',
+      fontSize: '3.5rem',
       fontWeight: 600,
     },
     h2: {

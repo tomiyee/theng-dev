@@ -3,7 +3,6 @@ import Vector2D from './Vector2D.js';
 import Boid from './Boid.js';
 import { Typography, styled } from '@mui/material';
 
-const BG_COLOR = '#2B2D42';
 /**
  * The interactive banner on the home page of the portfolio. It has the flocking simulator.
  */
@@ -38,7 +37,10 @@ const Banner: React.FC = () => {
     const update = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      ctx.fillStyle = BG_COLOR;
+      const gradient = ctx.createLinearGradient(0, 0, 0, window.innerHeight);
+      gradient.addColorStop(0, 'hsl(204, 98%, 20%)');
+      gradient.addColorStop(0.5, 'hsl(233, 21%, 25%)');
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       boids.forEach((boid) => {
         boid.update(boids, mousePos);
@@ -62,7 +64,7 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <BannerSection>
+    <BannerSection id="banner">
       <Canvas
         ref={canvasRef}
         width="100%"

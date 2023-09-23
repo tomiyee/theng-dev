@@ -1,17 +1,23 @@
-import { Box, Chip, Grid, Typography, styled } from '@mui/material';
+import { Box, Chip, Grid, Typography, styled, useTheme } from '@mui/material';
 import profile from '../../assets/profile.jpg';
 import { FC } from 'react';
 import HomePageSection from './HomePageSection';
 
 const AboutMeSection: FC = () => {
+  const theme = useTheme();
   return (
-    <HomePageSection title="About Me">
+    <HomePageSection
+      light
+      title="About Me"
+      id="about"
+      componentProps={{ sx: { background: theme.palette.primary.main } }}
+    >
       <Grid container>
         <Grid item xs={12} md={6}>
-          <Typography variant="h3" pb={2}>
+          <Typography variant="h3" pb={2} color={theme.palette.grey[50]}>
             Get to know me!
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" color={theme.palette.grey[200]}>
             I am a <strong>UX Designer</strong> and{' '}
             <strong>Full-Stack Engineer</strong> with a backgrond in crafting
             user-centric digital experiences and a passion for accessible
@@ -19,23 +25,28 @@ const AboutMeSection: FC = () => {
             the challenge of blending cutting-edge technology with intuitive
             design.
           </Typography>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Box m="auto">
-            <Portrait />
-          </Box>
-          <Typography variant="h3" pb={2}>
-            My Skills
+          <Typography variant="h3" py={2} color="white">
+            My skills
           </Typography>
 
           <Box display="flex" flexWrap="wrap" gap={1}>
-            <StyledChip label="HTML" />
-            <StyledChip label="CSS" />
-            <StyledChip label="Javascript" />
-            <StyledChip label="React.js" />
-            <StyledChip label="GitHub" />
-            <StyledChip label="Terminal" />
-            <StyledChip label="Python" />
+            <StyledChip color="secondary" label="HTML" />
+            <StyledChip color="secondary" label="CSS" />
+            <StyledChip color="secondary" label="Javascript" />
+            <StyledChip color="secondary" label="React.js" />
+            <StyledChip color="secondary" label="GitHub" />
+            <StyledChip color="secondary" label="Terminal" />
+            <StyledChip color="secondary" label="Python" />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box
+            display="flex"
+            my={2}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Portrait />
           </Box>
         </Grid>
       </Grid>
@@ -87,4 +98,5 @@ const StyledChip = styled(Chip)({
   borderRadius: '4px',
   padding: '0.7rem',
   height: 'unset',
+  color: 'white',
 });
