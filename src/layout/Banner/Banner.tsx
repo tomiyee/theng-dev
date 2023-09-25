@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Vector2D from './Vector2D.js';
-import './Banner.css';
-import Boid from './Boid';
+import Boid from './Boid.js';
+import { Typography, styled } from '@mui/material';
 
-const BG_COLOR = '#2B2D42';
 /**
- * Banner is the banner on the home page of my portfolio. It has the flocking simulator.
+ * The interactive banner on the home page of the portfolio. It has the flocking simulator.
  */
 const Banner: React.FC = () => {
   const mousePos = useRef<Vector2D>();
@@ -38,7 +37,10 @@ const Banner: React.FC = () => {
     const update = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      ctx.fillStyle = BG_COLOR;
+      const gradient = ctx.createLinearGradient(0, 0, 0, window.innerHeight);
+      gradient.addColorStop(0, 'hsl(204, 98%, 20%)');
+      gradient.addColorStop(0.5, 'hsl(233, 21%, 25%)');
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       boids.forEach((boid) => {
         boid.update(boids, mousePos);
@@ -62,20 +64,59 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <section className="banner" id="banner">
-      <canvas
+    <BannerSection id="banner">
+      <Canvas
         ref={canvasRef}
-        className="banner-bg-canvas"
         width="100%"
         height="100%"
         onMouseEnter={updateMousePos}
         onMouseLeave={() => (mousePos.current = undefined)}
         onMouseMove={updateMousePos}
       />
-      <div className="banner-text">
-        Hello, I&apos;m <span className="highlight">Tommy Heng</span>.
-      </div>
-    </section>
+      <BannerText />
+    </BannerSection>
   );
 };
 export default Banner;
+
+const BannerText = () => {
+  return (
+    <Typography
+      variant="h1"
+      textAlign="center"
+      sx={{
+        zIndex: 1,
+        fontWeight: 'bold',
+        letterSpacing: '0.3rem',
+        pointerEvents: 'none',
+      }}
+    >
+      Hey, I&apos;m{' '}
+      <Typography variant="h1" component="span" color="secondary.light">
+        Tommy Heng
+      </Typography>
+    </Typography>
+  );
+};
+
+const Canvas = styled('canvas')({
+  position: 'absolute',
+  zIndex: 0,
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+});
+
+const BannerSection = styled('div')(({ theme }) => ({
+  position: 'relative',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  height: 'calc(100vh)',
+  margin: 0,
+  padding: 0,
+  backgroundColor: theme.palette.primary.main,
+  color: 'white',
+}));

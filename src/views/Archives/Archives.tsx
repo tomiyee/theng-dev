@@ -1,10 +1,18 @@
-import './Archives.css';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import LaunchIcon from '@mui/icons-material/Launch';
 
 import projects from '../../assets/project-data.json';
-import React from 'react';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Link,
+  Typography,
+} from '@mui/material';
+import DynamicGrid from '../../components/DynamicGrid';
 
 type ProjectData = (typeof projects)[0];
 
@@ -25,36 +33,23 @@ interface ArchiveItemProps {
 }
 
 const ArchiveItem: React.FC<ArchiveItemProps> = ({ projectData }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { title, desc, date, tech, links } = projectData;
 
   return (
-    <article className="archive-item">
-      <h2>{title}</h2>
-      <span>{date}</span>
-      <p>{desc}</p>
-      <div>
-        {tech.map((item, i) => (
-          <li key={i} className={'project-tech-element'}>
-            {item}
-          </li>
+    <Card sx={{ flex: 1, minWidth: 300 }}>
+      <CardHeader title={<Typography>{title}</Typography>} />
+      <CardContent>
+        <Typography>{desc}</Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        {links.map((linkData, i) => (
+          <Link href={linkData[1]} key={`${title}-link-${i}`}>
+            <IconButton>{linkToIcon[linkData[0] as LinkType]}</IconButton>
+          </Link>
         ))}
-      </div>
-      <div>
-        {links.map(([linkType, linkUrl], i) => (
-          <a
-            key={i}
-            href={linkUrl}
-            style={{ color: 'inherit' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <div className="project-link">
-              {linkToIcon[linkType as LinkType]}
-            </div>
-          </a>
-        ))}
-      </div>
-    </article>
+      </CardActions>
+    </Card>
   );
 };
 
@@ -62,11 +57,11 @@ const Archives = () => {
   return (
     <main>
       <h1>Archives</h1>
-      <div className="archive-list">
+      <DynamicGrid spacing={2} elementWidth={300}>
         {projects.map((projectData, i) => (
           <ArchiveItem projectData={projectData} key={i} />
         ))}
-      </div>
+      </DynamicGrid>
     </main>
   );
 };

@@ -28,11 +28,11 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "cd build && cp index.html 404.html && cd .. && gh-pages -d build"
   },
   "pre-commit": [
-    "lint-fix",
-    "style"
+    "lint",
+    "style-check"
   ],
   "eslintConfig": {
     "extends": [
