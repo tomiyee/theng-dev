@@ -25,9 +25,15 @@ import { Menu } from '@mui/icons-material';
 const navbarLinks = [
   ['/#about', 'About'],
   ['/#projects', 'Projects'],
-  ['/#contact', 'Contact'],
+  // ['/#contact', 'Contact'],
 ] as const;
 
+/**
+ *
+ * Specifications
+ * --------------
+ * - When on mobile, shows a hamburger menu button that opens a dropdown
+ */
 const Navbar: React.FC = () => {
   const theme = useTheme();
   const location = useLocation();
@@ -81,7 +87,7 @@ const Navbar: React.FC = () => {
       </Fade>
       <Drawer anchor="top" open={isMobile && drawerOpen} onClose={closeDrawer}>
         <List sx={{ background: theme.palette.primary.main }}>
-          <Link href={'/'} onClick={closeDrawer}>
+          <Link href="/" onClick={closeDrawer}>
             <ListItem>
               <ListItemText primaryTypographyProps={{ color: 'white' }}>
                 Home
@@ -112,6 +118,11 @@ const Navbar: React.FC = () => {
 
 export default Navbar;
 
+/**
+ * On mount, attaches an event listener to yield the number of pixels the
+ * user has scrolled from the top of the page. On unmount, removes the
+ * event lister
+ */
 const useScrollTop = (): number => {
   const [scrollTop, setScrollTop] = useState(0);
   useEffect(() => {
@@ -119,7 +130,6 @@ const useScrollTop = (): number => {
     window.addEventListener('scroll', updateScrollTop);
     return () => window.removeEventListener('scroll', updateScrollTop);
   });
-
   return scrollTop;
 };
 

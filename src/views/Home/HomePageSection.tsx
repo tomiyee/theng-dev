@@ -45,7 +45,12 @@ const HomePageSection: React.FC<PropsWithChildren<HomePageSectionProps>> = ({
         >
           <StyledSectionHeader>{title}</StyledSectionHeader>
         </Typography>
-        <Typography variant="body2" pb="2rem">
+        <Typography
+          variant="body2"
+          pb="2rem"
+          textAlign="center"
+          color={light ? 'white' : undefined}
+        >
           {subtitle}
         </Typography>
         {children}

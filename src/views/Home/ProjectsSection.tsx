@@ -1,4 +1,11 @@
-import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
+import {
+  useTheme,
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import HomePageSection from './HomePageSection';
 import { PropsWithChildren } from 'react';
 import appInventorImage from '../../assets/projects/app-inventor.png';
@@ -7,16 +14,21 @@ import conservationXLabsImage from '../../assets/projects/conservation-x-labs.pn
 import { YouTube } from '@mui/icons-material';
 
 const ProjectsSection: React.FC = () => {
+  const theme = useTheme();
   return (
     <HomePageSection
+      light
       title="Projects"
       subtitle="Here are some different projects I've worked on."
       id="projects"
+      componentProps={{ sx: { background: theme.palette.primary.dark } }}
     >
       <Stack spacing={3}>
         <ProjectSummary imageSrc={tutorIntelligenceImage}>
-          <Typography variant="h5">Tutor Intelligence Inc.</Typography>
-          <Typography variant="body1" py={2}>
+          <Typography variant="h5" color="secondary">
+            Tutor Intelligence Inc.
+          </Typography>
+          <Typography variant="body1" py={2} color="white">
             At Tutor Intelligence, I led the conceptual redesign to improve the
             accessibility of modern robotics technology for small and
             medium-sized businesses. By leveraging computer vision technology,
@@ -26,16 +38,17 @@ const ProjectsSection: React.FC = () => {
         </ProjectSummary>
 
         <ProjectSummary imageSrc={appInventorImage}>
-          <Typography variant="h5">
+          <Typography variant="h5" color="secondary">
             MIT App Inventor
             <IconButton
               target="_blank"
               href="https://youtu.be/iXBDavQc29s?si=gLO9awtCWngQL1gq"
+              color="secondary"
             >
               <YouTube />
             </IconButton>
           </Typography>
-          <Typography variant="body1" py={2}>
+          <Typography variant="body1" py={2} color="white">
             With MIT App Inventor, I designed and engineered a visual
             programming interface for building custom apps on conversational
             agents like Amazon Alexa. I also led workshops on AI and early
@@ -44,8 +57,10 @@ const ProjectsSection: React.FC = () => {
         </ProjectSummary>
 
         <ProjectSummary imageSrc={conservationXLabsImage}>
-          <Typography variant="h5">Conservation X. Labs</Typography>
-          <Typography variant="body1" py={2}>
+          <Typography variant="h5" color="secondary">
+            Conservation X. Labs
+          </Typography>
+          <Typography variant="body1" py={2} color="white">
             At Conservation X. Labs, I developed and implemented the user
             interface for training and utilizing computer vision models for use
             in tracking the population of endangered species.

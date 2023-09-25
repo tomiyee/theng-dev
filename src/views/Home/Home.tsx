@@ -1,5 +1,5 @@
 import AboutMeSection from './AboutMeSection';
-import ContactMeSection from './ContactMeSection';
+// import ContactMeSection from './ContactMeSection';
 import ProjectsSection from './ProjectsSection';
 
 const Home: React.FC = () => {
@@ -7,7 +7,7 @@ const Home: React.FC = () => {
     <main>
       <AboutMeSection />
       <ProjectsSection />
-      <ContactMeSection />
+      {/* <ContactMeSection /> */}
     </main>
   );
 };
