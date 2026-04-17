@@ -33,12 +33,12 @@ class Boid {
   private pos: Vector2D;
   private vel: Vector2D;
   private acc: Vector2D;
-  private canvasRef: React.RefObject<HTMLCanvasElement>;
+  private canvasRef: React.RefObject<HTMLCanvasElement | null>;
 
   constructor(
     x: number,
     y: number,
-    canvasRef: React.RefObject<HTMLCanvasElement>,
+    canvasRef: React.RefObject<HTMLCanvasElement | null>,
   ) {
     this.canvasRef = canvasRef;
     this.pos = new Vector2D(x, y);

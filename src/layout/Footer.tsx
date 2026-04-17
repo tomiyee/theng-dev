@@ -32,7 +32,7 @@ const Footer: FC = () => {
         <Typography>
           TOMMY HENG{' '}
           <Typography component="span" color="secondary.light">
-            ©2023
+            ©2026
           </Typography>
         </Typography>
       </Stack>

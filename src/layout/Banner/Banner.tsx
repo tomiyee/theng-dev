@@ -7,7 +7,7 @@ import { Typography, styled } from '@mui/material';
  * The interactive banner on the home page of the portfolio. It has the flocking simulator.
  */
 const Banner: React.FC = () => {
-  const mousePos = useRef<Vector2D>();
+  const mousePos = useRef<Vector2D | undefined>(undefined);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const width = window.innerWidth;
