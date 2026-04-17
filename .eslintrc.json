@@ -15,6 +15,11 @@
     "sourceType": "module"
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     // Highly Recommended
     "@typescript-eslint/ban-ts-comment": "off",
