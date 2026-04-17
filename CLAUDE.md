@@ -21,6 +21,7 @@ Pre-commit hooks run `lint` and `style-check` automatically before every commit.
 This is a single-page React portfolio site built with Vite + TypeScript. There are no tests.
 
 **Routing** — `src/routes/index.tsx` composes two route configs via `useRoutes`:
+
 - `HomeRoute` — renders `<Banner>` above `<MainLayout>` with `<Home>` as the child. The Banner is only shown on `/`.
 - `MainRoutes` — shares `<MainLayout>` (Navbar + Outlet + Footer) for `/projects`, `/foundry`, and the 404 fallback.
 

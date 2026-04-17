@@ -67,6 +67,9 @@ class Boid {
    * of gravity" of its local flock
    */
   cohesion(flock: Boid[]): Vector2D {
+    if (flock.length === 0) {
+      return new Vector2D(0, 0);
+    }
     const avg = { x: 0, y: 0 };
     for (let i = 0; i < flock.length; i++) {
       avg.x += flock[i].pos.x;
@@ -141,14 +144,13 @@ class Boid {
     const height = this.canvasRef.current?.height ?? 600;
     const flock = this.localFlock(boids);
     this.acc.scale(0);
-    if (flock.length > 0) {
-      const forceAlign = this.align(flock);
-      const forceCohesion = this.cohesion(flock);
-      const forceRepulsion = this.repulsion(flock, mousePosRef.current);
-      this.acc.add(forceAlign, true);
-      this.acc.add(forceCohesion, true);
-      this.acc.add(forceRepulsion, true);
-    }
+
+    const forceAlign = this.align(flock);
+    const forceCohesion = this.cohesion(flock);
+    const forceRepulsion = this.repulsion(flock, mousePosRef.current);
+    this.acc.add(forceAlign, true);
+    this.acc.add(forceCohesion, true);
+    this.acc.add(forceRepulsion, true);
 
     this.vel.add(this.acc, true);
     this.vel.setLength(BOID_SPEED);
